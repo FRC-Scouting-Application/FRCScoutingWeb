@@ -24,6 +24,7 @@ builder.Services.AddDbContext<AppDataContext>(options =>
     options.UseSqlServer(connectionString)
         .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
+builder.Services.AddScoped<IAppDataRepository, AppDataRepository>();
 
 // Misc
 builder.Services.AddDirectoryBrowser();
