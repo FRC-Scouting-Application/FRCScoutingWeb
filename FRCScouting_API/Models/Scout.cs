@@ -5,16 +5,12 @@ namespace FRCScouting_API.Models
 {
     public class Scout : ScoutBase
     {
-        [Key]
-        [Column("_id")]
-        public int Id { get; set; }
-
         [Required]
         [Column("template_id")]
         public int TemplateId { get; set; }
 
         [Required]
-        [Column("_template_version")]
+        [Column("template_version")]
         public int TemplateVersion { get; set; }
 
         [Required]
@@ -25,5 +21,13 @@ namespace FRCScouting_API.Models
         [Required]
         [Column("xml")]
         public byte[]? XML { get; set; }
+
+        public bool NeedsUpdate(Scout scout)
+        {
+            return !(scout.Id == Id && scout.TeamKey == TeamKey &&
+                scout.EventKey == EventKey && scout.ScoutName == ScoutName &&
+                scout.TemplateId == TemplateId && scout.TemplateVersion == TemplateVersion &&
+                scout.MatchKey == MatchKey && scout.XML == XML);
+        }
     }
 }

@@ -5,6 +5,10 @@ namespace FRCScouting_API.Models
 {
     public class ScoutBase
     {
+        [Key]
+        [Column("_id")]
+        public int Id { get; set; }
+
         [Required]
         [MaxLength(50)]
         [Column("team_key")]

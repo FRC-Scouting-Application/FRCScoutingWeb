@@ -1,56 +1,53 @@
 ﻿using FRCScouting_API.Models;
 using FRCScouting_API.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FRCScouting_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EventsController : Controller
+    public class TemplateController : ControllerBase
     {
-
         private readonly IAppDataRepository _repository;
 
-        public EventsController(IAppDataRepository repository)
+        public TemplateController(IAppDataRepository repository)
         {
             _repository = repository;
         }
-        
+
         [HttpGet]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IList<Event>>> GetEvents()
+        public async Task<ActionResult<IList<Template>>> GetTemplates()
         {
-            var events = await _repository.GetEventsAsync();
+            var templates = await _repository.GetTemplatesAsync();
 
-            if (events == null)
+            if (templates == null)
                 return StatusCode(StatusCodes.Status500InternalServerError);
 
-            if (events.Count == 0)
+            if (templates.Count == 0)
                 return NotFound();
 
-            return Ok(events);
+            return Ok(templates);
         }
 
-        [HttpPost("Custom")]
+        [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> AddEvents(IList<Event> events)
+        public async Task<ActionResult> AddTemplates(IList<Template> templates)
         {
-            if (events == null || events.Count == 0)
+            if (templates == null || templates.Count == 0)
                 return BadRequest();
 
-            foreach (var e in events)
-                e.Key = null;
-
-            var sucsess = await _repository.AddEventsAsync(events);
+            var sucsess = await _repository.AddTemplatesAsync(templates);
             if (!sucsess)
                 return StatusCode(StatusCodes.Status500InternalServerError);
 
-            return Created("api/Events", events);
+            return Created("api/Templates", templates);
         }
     }
 }

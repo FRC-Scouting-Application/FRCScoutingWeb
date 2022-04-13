@@ -32,11 +32,6 @@ namespace FRCScouting_API.Services
             }
         }
 
-        public Task<Event?> AddCustomEventAsync(Event @event)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> AddEventsAsync(IList<Event> events)
         {
             try
@@ -50,6 +45,12 @@ namespace FRCScouting_API.Services
                 while (eventsStack.Count > 0)
                 {
                     var e = eventsStack.Pop();
+
+                    if (e.Key == null)
+                    {
+                        e.Key = $"custom-{Guid.NewGuid()}";
+                    }
+
                     var index = existing.IndexOf(e);
 
                     if (index == -1)
@@ -77,11 +78,6 @@ namespace FRCScouting_API.Services
                 _telemetryClient.TrackException(ex);
                 return false;
             }
-        }
-
-        public Task<bool> AddEventAsync(Event @event, bool save = true)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
@@ -121,6 +117,12 @@ namespace FRCScouting_API.Services
                 while (teamsStack.Count > 0)
                 {
                     var team = teamsStack.Pop();
+
+                    if (team.Key == null)
+                    {
+                        team.Key = $"custom-{Guid.NewGuid()}";
+                    }
+
                     var index = existing.IndexOf(team);
 
                     if (index == -1)
@@ -140,28 +142,6 @@ namespace FRCScouting_API.Services
 
                 _dbContext.Teams.UpdateRange(update);
                 await _dbContext.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                _telemetryClient.TrackException(ex);
-                return false;
-            }
-        }
-
-        public async Task<bool> AddTeamAsync(Team team, bool save = true)
-        {
-            try
-            {
-                var t = _dbContext.Teams.Find(team.Key);
-                if (t == null)
-                    _dbContext.Teams.Add(team);
-                else
-                    _dbContext.Teams.Update(team);
-                
-                if (save)
-                    await _dbContext.SaveChangesAsync();
-
                 return true;
             }
             catch (Exception ex)
@@ -203,6 +183,12 @@ namespace FRCScouting_API.Services
                 while (matchesStack.Count > 0)
                 {
                     var match = matchesStack.Pop();
+
+                    if (match.Key == null)
+                    {
+                        match.Key = $"custom-{Guid.NewGuid()}";
+                    }
+
                     var index = existing.IndexOf(match);
 
                     if (index == -1)
@@ -232,11 +218,6 @@ namespace FRCScouting_API.Services
             }
         }
 
-        public Task<bool> AddMatchAsync(Match match, bool save = true)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
         #region Templates
 
@@ -255,20 +236,60 @@ namespace FRCScouting_API.Services
                 return null;
             }
         }
-        public Task<Template?> AddTemplateAsync(Template template)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<IList<Template>?> AddTemplatesAsync(IList<Template> templates)
+        public async Task<bool> AddTemplatesAsync(IList<Template> templates)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var templateStack = new Stack<Template>(templates);
+                var existing = _dbContext.Templates.ToList();
+
+                var add = new List<Template>();
+                var update = new List<Template>();
+
+                while (templateStack.Count > 0)
+                {
+                    var template = templateStack.Pop();
+
+                    var index = existing.IndexOf(template);
+
+                    if (index == -1)
+                    {
+                        add.Add(template);
+                    }
+                    else
+                    {
+                        var matched = existing[index];
+
+                        if (template.NeedsUpdate(template))
+                        {
+                            var maxVersion = (existing.Where(t => t.Id == template.Id)).Max(t => t.Version);
+                            template.Version = maxVersion + 1;
+                            template.Created = DateTime.Now;
+
+                            update.Add(template);
+                        }   
+                    }
+                }
+
+                await _dbContext.Templates.AddRangeAsync(add);
+                await _dbContext.SaveChangesAsync();
+
+                _dbContext.Templates.UpdateRange(update);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackException(ex);
+                return false;
+            }
         }
 
         #endregion
         #region Scout
 
-        public async Task<IList<Scout>?> GetScoutsByEvent(string eventKey)
+        public async Task<IList<Scout>?> GetScoutsByEventAsync(string eventKey)
         {
             try
             {
@@ -284,7 +305,7 @@ namespace FRCScouting_API.Services
             }
         }
 
-        public async Task<IList<Scout>?> GetScoutsByTeam(string teamKey)
+        public async Task<IList<Scout>?> GetScoutsByTeamAsync(string teamKey)
         {
             try
             {
@@ -300,14 +321,47 @@ namespace FRCScouting_API.Services
             }
         }
 
-        public Task<bool> AddScoutAsync(Scout scout)
+        public async Task<bool> AddScoutsAsync(IList<Scout> scouts)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var scoutStack = new Stack<Scout>(scouts);
+                var existing = _dbContext.Scouts.ToList();
 
-        public Task<bool> AddScouts(IList<Scout> scouts)
-        {
-            throw new NotImplementedException();
+                var add = new List<Scout>();
+                var update = new List<Scout>();
+
+                while (scoutStack.Count > 0)
+                {
+                    var scout = scoutStack.Pop();
+
+                    var index = existing.IndexOf(scout);
+
+                    if (index == -1)
+                    {
+                        add.Add(scout);
+                    }
+                    else
+                    {
+                        var matched = existing[index];
+
+                        if (scout.NeedsUpdate(scout))
+                            update.Add(scout);
+                    }
+                }
+
+                await _dbContext.Scouts.AddRangeAsync(add);
+                await _dbContext.SaveChangesAsync();
+
+                _dbContext.Scouts.UpdateRange(update);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackException(ex);
+                return false;
+            }
         }
 
         #endregion
@@ -345,14 +399,47 @@ namespace FRCScouting_API.Services
             }
         }
 
-        public Task<bool> AddNoteAsync(Note note)
+        public async Task<bool> AddNotesAsync(IList<Note> notes)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var noteStack = new Stack<Note>(notes);
+                var existing = _dbContext.Notes.ToList();
 
-        public Task<bool> AddNotesAsync(IList<Note> notes)
-        {
-            throw new NotImplementedException();
+                var add = new List<Note>();
+                var update = new List<Note>();
+
+                while (noteStack.Count > 0)
+                {
+                    var note = noteStack.Pop();
+
+                    var index = existing.IndexOf(note);
+
+                    if (index == -1)
+                    {
+                        add.Add(note);
+                    }
+                    else
+                    {
+                        var matched = existing[index];
+
+                        if (note.NeedsUpdate(note))
+                            update.Add(note);
+                    }
+                }
+
+                await _dbContext.Notes.AddRangeAsync(add);
+                await _dbContext.SaveChangesAsync();
+
+                _dbContext.Notes.UpdateRange(update);
+                await _dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackException(ex);
+                return false;
+            }
         }
         #endregion
     }

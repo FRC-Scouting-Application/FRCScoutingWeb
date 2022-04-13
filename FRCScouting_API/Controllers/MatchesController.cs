@@ -21,7 +21,7 @@ namespace FRCScouting_API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IList<Match>>> GetEvents(string event_key)
+        public async Task<ActionResult<IList<Match>>> GetMatches(string event_key)
         {
             var matches = await _repository.GetMatchesAsync(event_key);
 
@@ -32,6 +32,25 @@ namespace FRCScouting_API.Controllers
                 return NotFound();
 
             return Ok(matches);
+        }
+
+        [HttpPost("Custom")]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> AddMatches(IList<Match> matches)
+        {
+            if (matches == null || matches.Count == 0)
+                return BadRequest();
+
+            foreach (var m in matches)
+                m.Key = null;
+
+            var sucsess = await _repository.AddMatchesAsync(matches);
+            if (!sucsess)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
+            return Created("api/Matches", matches);
         }
     }
 }

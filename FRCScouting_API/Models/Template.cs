@@ -31,5 +31,12 @@ namespace FRCScouting_API.Models
         [Required]
         [Column("xml")]
         public byte[]? XML { get; set; }
+
+        public bool NeedsUpdate(Template template)
+        {
+            return !(template.Id == Id && template.Version == Version && template.Type == Type && 
+                    template.Name == Name && template.DefaultTemplate == DefaultTemplate &&
+                    template.Created == Created && template.XML == XML);
+        }
     }
 }
