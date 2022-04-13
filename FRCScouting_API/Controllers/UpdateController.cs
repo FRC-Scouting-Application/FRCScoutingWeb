@@ -8,46 +8,24 @@ namespace FRCScouting_API.Controllers
     [ApiController]
     public class UpdateController : Controller
     {
-        private readonly ITBAService _tbaService;
-        private readonly IAppDataRepository _repository;
+        private readonly IUpdateService _updateService;
 
-        public UpdateController(ITBAService tbaService, IAppDataRepository repository)
+        public UpdateController(IUpdateService updateService)
         {
-            _tbaService = tbaService;
-            _repository = repository;
+            _updateService = updateService;
         }
 
         [HttpGet]
+        [Produces("text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<string>> Update()
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            // Teams
-            var teams = await _tbaService.GetTeamsAsync();
-            if (teams == null || teams.Count == 0) 
-                return StatusCode(StatusCodes.Status500InternalServerError);
-
-            var addTeams = await _repository.AddTeamsAsync(teams);
-            if (!addTeams)
-                return StatusCode(StatusCodes.Status500InternalServerError);
-
-            // Events
-            var events = await _tbaService.GetEventsAsync(2022);
-            if (events == null || events.Count == 0) 
-                return StatusCode(StatusCodes.Status500InternalServerError);
-
-            var addEvents = await _repository.AddEventsAsync(events);
-            if (!addEvents)
-                return StatusCode(StatusCodes.Status500InternalServerError);
-
-            // Matches
-            var matches = await _tbaService.GetMatchesAsync(events);
-            if (matches == null || events.Count == 0) 
-                return StatusCode(StatusCodes.Status500InternalServerError);
-
-            var addMatches = await _repository.AddMatchesAsync(matches);
-            if (!addMatches)
+            var success = await _updateService.UpdateAll();
+            if (!success)
                 return StatusCode(StatusCodes.Status500InternalServerError);
 
             stopwatch.Stop();

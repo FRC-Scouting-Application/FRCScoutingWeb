@@ -33,6 +33,9 @@ builder.Services.AddScoped<IAppDataRepository, AppDataRepository>();
 // TBA API
 builder.Services.AddHttpClient<ITBAService, TBAService>();
 
+// Update
+builder.Services.AddScoped<IUpdateService, UpdateService>();
+
 // Misc
 builder.Services.AddDirectoryBrowser();
 builder.Services.AddMemoryCache();

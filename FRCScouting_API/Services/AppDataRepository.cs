@@ -179,7 +179,7 @@ namespace FRCScouting_API.Services
             try
             {
                 await _dbContext.SaveChangesAsync();
-                var matches = _dbContext.Matches.Where(e => e.Key == eventKey).ToList();
+                var matches = _dbContext.Matches.Where(e => e.EventKey == eventKey).ToList();
 
                 return matches;
             }
