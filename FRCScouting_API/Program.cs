@@ -9,10 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Get Api Settings
 var configuration = builder.Configuration;
 builder.Services.Configure<ApiSettings>(configuration.GetSection("Api"));
+builder.Services.Configure<Info>(configuration.GetSection("Info"));
 
 // Bind an instance of our settings to a local variable for referencing in this method
 var apiSettings = new ApiSettings();
+var info = new Info();
 configuration.GetSection("Api").Bind(apiSettings);
+configuration.GetSection("Info").Bind(info);
 
 // Sql Server connection string
 var connectionString = apiSettings.ConfigurationDataContext!
@@ -55,16 +58,14 @@ builder.Services.Configure<KestrelServerOptions>(options =>
 });
 
 // Swagger
-var swagger_title = "FRC Scoting API";
-var swagger_version = "v0.1.0";
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc(swagger_version, new()
+    c.SwaggerDoc($"v{info.Version}", new()
     {
-        Title = swagger_title,
-        Version = swagger_version,
-        Description = "API for connecting the web portal and android app together with data"
+        Title = info.Title,
+        Version = $"v{info.Version}",
+        Description = info.Description
     });
 });
 
@@ -89,7 +90,7 @@ app.UseSwagger();
 
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint($"/swagger/{swagger_version}/swagger.json", swagger_title);
+    c.SwaggerEndpoint($"/swagger/v{info.Version}/swagger.json", info.Title);
 });
 
 app.UseEndpoints(endpoints =>
