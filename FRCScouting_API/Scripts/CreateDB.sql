@@ -6,16 +6,16 @@ USE [scouting-frc2386];
 /* Drop Existing Tables */
 PRINT 'Dropping Existing Tables';
 PRINT '';
-DROP TABLE IF EXISTS Note;
-DROP TABLE IF EXISTS Scout;
-DROP TABLE IF EXISTS Template;
-DROP TABLE IF EXISTS Match;
-DROP TABLE IF EXISTS Team;
-DROP TABLE IF EXISTS Event;
+DROP TABLE IF EXISTS Notes;
+DROP TABLE IF EXISTS Scouts;
+DROP TABLE IF EXISTS Templates;
+DROP TABLE IF EXISTS Matches;
+DROP TABLE IF EXISTS Teams;
+DROP TABLE IF EXISTS Events;
 GO
 
-PRINT 'Create Event Table';
-CREATE TABLE Event (
+PRINT 'Create Events Table';
+CREATE TABLE Events (
 	_key VARCHAR(50) PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
 	short_name VARCHAR(255) NULL,
@@ -34,8 +34,8 @@ CREATE TABLE Event (
 );
 GO
 
-PRINT 'Create Team Table';
-CREATE TABLE Team (
+PRINT 'Create Teams Table';
+CREATE TABLE Teams (
 	_key VARCHAR(50) PRIMARY KEY,
 	team_number INT NOT NULL,
 	nickname VARCHAR(255) NULL,
@@ -52,16 +52,17 @@ CREATE TABLE Team (
 );
 GO
 
-PRINT 'Create Match Table';
-CREATE TABLE Match (
+PRINT 'Create Matches Table';
+CREATE TABLE Matches (
 	_key VARCHAR(50) PRIMARY KEY,
-	red_1 VARCHAR(50) NULL FOREIGN KEY REFERENCES Team(_key),
-	red_2 VARCHAR(50) NULL FOREIGN KEY REFERENCES Team(_key),
-	red_3 VARCHAR(50) NULL FOREIGN KEY REFERENCES Team(_key),
-	blue_1 VARCHAR(50) NULL FOREIGN KEY REFERENCES Team(_key),
-	blue_2 VARCHAR(50) NULL FOREIGN KEY REFERENCES Team(_key),
-	blue_3 VARCHAR(50) NULL FOREIGN KEY REFERENCES Team(_key),
-	event_key VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Event(_key),
+	match_number INT NOT NULL,
+	red_1 VARCHAR(50) NULL FOREIGN KEY REFERENCES Teams(_key),
+	red_2 VARCHAR(50) NULL FOREIGN KEY REFERENCES Teams(_key),
+	red_3 VARCHAR(50) NULL FOREIGN KEY REFERENCES Teams(_key),
+	blue_1 VARCHAR(50) NULL FOREIGN KEY REFERENCES Teams(_key),
+	blue_2 VARCHAR(50) NULL FOREIGN KEY REFERENCES Teams(_key),
+	blue_3 VARCHAR(50) NULL FOREIGN KEY REFERENCES Teams(_key),
+	event_key VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Events(_key),
 	red_score INT NULL,
 	blue_score INT NULL,
 	winning_alliance VARCHAR(10) NULL,
@@ -71,8 +72,8 @@ CREATE TABLE Match (
 );
 GO
 
-PRINT 'Create Template Table';
-CREATE TABLE Template (
+PRINT 'Create Templates Table';
+CREATE TABLE Templates (
 	_id INT IDENTITY(0,1),
 	_version INT NOT NULL DEFAULT 0,
 	type VARCHAR(10) NOT NULL,
@@ -84,25 +85,25 @@ CREATE TABLE Template (
 );
 GO
 
-PRINT 'Create Scout Table';
-CREATE TABLE Scout (
+PRINT 'Create Scouts Table';
+CREATE TABLE Scouts (
 	_id INT IDENTITY(0,1),
-	team_key VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Team(_key),
-	event_key VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Event(_key),
+	team_key VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Teams(_key),
+	event_key VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Events(_key),
 	template_id INT NOT NULL,
 	template_version INT NOT NULL,
-	match_key VARCHAR(50) NULL FOREIGN KEY REFERENCES Match(_key),
+	match_key VARCHAR(50) NULL FOREIGN KEY REFERENCES Matches(_key),
 	scout_name VARCHAR(255) NOT NULL,
 	xml XML NOT NULL,
-	FOREIGN KEY(template_id, template_version) REFERENCES Template(_id, _version)
+	FOREIGN KEY(template_id, template_version) REFERENCES Templates(_id, _version)
 );
 GO
 
-PRINT 'Create Note Table';
-CREATE TABLE Note (
+PRINT 'Create Notes Table';
+CREATE TABLE Notes (
 	_id INT IDENTITY(0,1) PRIMARY KEY,
-	team_key VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Team(_key),
-	event_key VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Event(_key),
+	team_key VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Teams(_key),
+	event_key VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Events(_key),
 	scout_name VARCHAR(255) NOT NULL,
 	text VARCHAR(MAX) NOT NULL
 );

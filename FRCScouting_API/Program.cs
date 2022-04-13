@@ -21,10 +21,17 @@ var connectionString = apiSettings.ConfigurationDataContext!
 // Add DB Context
 builder.Services.AddDbContext<AppDataContext>(options =>
 {
-    options.UseSqlServer(connectionString)
+    options.UseSqlServer(connectionString, options =>
+    {
+        options.MinBatchSize(1)
+            .MaxBatchSize(100);
+    })
         .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 builder.Services.AddScoped<IAppDataRepository, AppDataRepository>();
+
+// TBA API
+builder.Services.AddHttpClient<ITBAService, TBAService>();
 
 // Misc
 builder.Services.AddDirectoryBrowser();
