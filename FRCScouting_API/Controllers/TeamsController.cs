@@ -10,10 +10,12 @@ namespace FRCScouting_API.Controllers
     public class TeamsController : ControllerBase
     {
         private readonly IAppDataRepository _repository;
+        private readonly ITBAService _tbaService;
 
-        public TeamsController(IAppDataRepository repository)
+        public TeamsController(IAppDataRepository repository, ITBAService tbaService)
         {
             _repository = repository;
+            _tbaService = tbaService;
         }
 
         [HttpGet]
@@ -32,6 +34,20 @@ namespace FRCScouting_API.Controllers
                 return NotFound();
 
             return Ok(teams);
+        }
+
+        [HttpGet("{team_key}/media")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<byte[]>> GetTeamMedia(string team_key)
+        {
+            var media = await _tbaService.GetTeamMediaAsync(team_key, 2022);
+
+            if (media == null)
+                return NotFound();
+
+            return Ok(media);
         }
     }
 }

@@ -4,7 +4,9 @@ using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SixLabors.ImageSharp;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace FRCScouting_API.Services
 {
@@ -137,6 +139,45 @@ namespace FRCScouting_API.Services
                 _telemetryClient.TrackException(ex);
                 return null;
             }
+        }
+
+        public async Task<byte[]?> GetTeamMediaAsync(string teamKey, int year)
+        {
+            try
+            {
+                var serializer = new JsonSerializer();
+                var response = await _httpClient.GetAsync($"{_apiSettings.TbaApiUrl}/team/{teamKey}/media/{year}");
+
+                if (!response.IsSuccessStatusCode) return null;
+
+                var streamReader = new StreamReader(response.Content.ReadAsStream());
+                var jsonReader = new JsonTextReader(streamReader);
+                var tbaMedia = serializer.Deserialize<List<TBAMedia>>(jsonReader);
+
+                if (tbaMedia == null) return null;
+
+                var media = tbaMedia.Where(m => m.Preferred == true).First();
+
+                if (media == null) return null;
+                if (media.Direct_Url == null) return null;
+
+                return await DonwloadMediaAsync(media.Direct_Url);
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackException(ex);
+                return null;
+            }
+        }
+
+        private async Task<byte[]?> DonwloadMediaAsync(string mediaUrl)
+        {
+            var response = await _httpClient.GetAsync(mediaUrl);
+
+            if (!response.IsSuccessStatusCode) return null;
+            if (response.Content == null) return null;
+
+            return await response.Content.ReadAsByteArrayAsync();
         }
 
         public async Task<IList<Team>?> GetTeamsAsync()
