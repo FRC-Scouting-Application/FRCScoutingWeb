@@ -1,23 +1,33 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FRCScouting_API.Models
 {
     public class Scout : ScoutBase
     {
-        [Key]
-        public int Id { get; set; }
+        [Required]
+        [Column("template_id")]
+        public int TemplateId { get; set; }
 
         [Required]
-        public int Template_Id { get; set; }
-
-        [Required]
-        public int Template_Version { get; set; }
+        [Column("template_version")]
+        public int TemplateVersion { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public string? Match_Key { get; set; }
+        [Column("match_key")]
+        public string? MatchKey { get; set; }
 
         [Required]
+        [Column("xml")]
         public byte[]? XML { get; set; }
+
+        public bool NeedsUpdate(Scout scout)
+        {
+            return !(scout.Id == Id && scout.TeamKey == TeamKey &&
+                scout.EventKey == EventKey && scout.ScoutName == ScoutName &&
+                scout.TemplateId == TemplateId && scout.TemplateVersion == TemplateVersion &&
+                scout.MatchKey == MatchKey && scout.XML == XML);
+        }
     }
 }

@@ -1,19 +1,27 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FRCScouting_API.Models
 {
     public class ScoutBase
     {
-        [Required]
-        [MaxLength(50)]
-        public string? Team_Key { get; set; }
+        [Key]
+        [Column("_id")]
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public string? Event_Key { get; set; }
+        [Column("team_key")]
+        public string? TeamKey { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        [Column("event_key")]
+        public string? EventKey { get; set; }
 
         [Required]
         [MaxLength(255)]
-        public string? Scout_Name { get; set; }
+        [Column("scout_name")]
+        public string? ScoutName { get; set; }
     }
 }
