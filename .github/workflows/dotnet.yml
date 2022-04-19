@@ -33,13 +33,8 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
       
-  deploy:
-    
-    runs-on: self-hosted
-    
-    steps:
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v3.0.0
+    - name: Go to Debug release folder
+      run: cd ./FRCScouting_API/bin/Debug/net6.0/
       
-    - name: ls
-      run: ls -al
+    - name: Copy files to www
+      run: cp -r ./* /var/www/scoutapi/
