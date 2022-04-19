@@ -30,5 +30,16 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       
-    - name: Copy Files to www
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      
+  deploy:
+    
+    runs-on: self-hosted
+    
+    steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v3.0.0
+      
+    - name: ls
       run: ls -al
