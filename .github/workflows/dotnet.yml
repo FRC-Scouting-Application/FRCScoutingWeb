@@ -30,9 +30,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.0.0
-      
     - name: Go to Debug release folder
       run: cd ./FRCScouting_API/bin/Debug/net6.0/
       
