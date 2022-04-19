@@ -30,5 +30,13 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       
+    - name: Variable Substitution
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: './FRCScouting_API/bin/Debug/net6.0/appsettings.json'
+      env:
+        Api.ConfigurationDataContextCredentials: ${{ secrets.CONFIGURATION_DATA_CONTEXT_CREDENTIALS }}
+        Api.TbaApiKey: ${{ secrets.TBA_API_KEY }}
+      
     - name: Copy files to www
       run: cp -r ./FRCScouting_API/bin/Debug/net6.0/* /var/www/scoutapi/
