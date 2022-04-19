@@ -30,8 +30,5 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
       
-    - name: Go to Debug release folder
-      run: cd ./FRCScouting_API/bin/Debug/net6.0/
-      
     - name: Copy files to www
-      run: cp -r ./* /var/www/scoutapi/
+      run: cp -r ./FRCScouting_API/bin/Debug/net6.0/* /var/www/scoutapi/
