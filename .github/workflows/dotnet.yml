@@ -1,0 +1,42 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+      
+    - name: Variable Substitution
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: './FRCScouting_API/bin/Debug/net6.0/appsettings.json'
+      env:
+        Api.ConfigurationDataContextCredentials: ${{ secrets.CONFIGURATION_DATA_CONTEXT_CREDENTIALS }}
+        Api.TbaApiKey: ${{ secrets.TBA_API_KEY }}
+      
+    - name: Copy files to www
+      run: cp -r ./FRCScouting_API/bin/Debug/net6.0/* /var/www/scoutapi/
