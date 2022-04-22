@@ -2,9 +2,11 @@
 {
     public class Media
     {
-        public string? Type { get; set; }
-        public bool Prefered { get; set; }
-        public string? DirectUrl { get; set; }
-        public string? ViewUrl { get; set; }
+        public byte[]? Data { get; set; }
+
+        public Media(byte[] data)
+        {
+            Data = data;
+        }
     }
 }
