@@ -1,8 +1,3 @@
-﻿/* Create Scouting Database */
-
-USE [scouting-frc2386];
-
-
 /* Drop Existing Tables */
 PRINT 'Dropping Existing Tables';
 PRINT '';

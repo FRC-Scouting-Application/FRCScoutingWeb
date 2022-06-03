@@ -1,0 +1,10 @@
+CREATE TABLE Templates (
+	_id INT IDENTITY(0,1),
+	_version INT NOT NULL DEFAULT 0,
+	type VARCHAR(10) NOT NULL,
+	name VARCHAR(255) NOT NULL,
+	default_template BIT NULL DEFAULT 0,
+	created DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+	xml XML NOT NULL,
+	PRIMARY KEY (_id, _version)
+);
