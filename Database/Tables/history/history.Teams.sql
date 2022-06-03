@@ -1,0 +1,22 @@
+CREATE TABLE [history].[Teams] (
+    HistoryId int IDENTITY(1,1) NOT NULL,
+    HistoryStatusId int NOT NULL,
+	Id VARCHAR(50) NOT NULL,
+	TeamNumber INT NOT NULL,
+	Nickname VARCHAR(255) NULL,
+	Name VARCHAR(MAX) NOT NULL,
+	SchoolName VARCHAR(MAX) NULL,
+	City VARCHAR(255) NULL,
+	StateProv VARCHAR(255) NULL,
+	Country VARCHAR(255) NULL,
+	Address VARCHAR(MAX) NULL,
+	PostalCode VARCHAR(50) NULL,
+	LocationName VARCHAR(MAX) NULL,
+	Website VARCHAR(MAX) NULL,
+	RookieYear INT NULL,
+    CreatedBy int NULL,
+    CreatedAt datetime2 NULL,
+    ModifiedBy int NULL,
+    ModifiedAt datetime2 NULL,
+    RowVersion timestamp NOT NULL
+);
