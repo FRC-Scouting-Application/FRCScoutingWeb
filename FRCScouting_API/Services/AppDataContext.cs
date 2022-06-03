@@ -1,5 +1,5 @@
-﻿using FRCScouting_API.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Models.Dbo;
 
 namespace FRCScouting_API.Services
 {
@@ -21,13 +21,13 @@ namespace FRCScouting_API.Services
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Match>()
-                .HasKey(x => x.Key);
+                .HasKey(x => x.Id);
 
             modelBuilder.Entity<Team>()
-                .HasKey(x => x.Key);
+                .HasKey(x => x.Id);
               
             modelBuilder.Entity<Event>()
-                .HasKey(x => x.Key);
+                .HasKey(x => x.Id);
 
             modelBuilder.Entity<Template>()
                 .HasKey(x => new { x.Id, x.Version });

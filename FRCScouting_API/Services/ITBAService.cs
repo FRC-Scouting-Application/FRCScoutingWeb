@@ -1,6 +1,4 @@
-﻿
-
-using FRCScouting_API.Models;
+﻿using Models.Dbo;
 
 namespace FRCScouting_API.Services
 {

@@ -1,4 +1,4 @@
-﻿namespace FRCScouting_API.Models.TBA
+﻿namespace Models.TBA
 {
     public class TBAMatch
     {
@@ -10,7 +10,7 @@
         public ulong? Time { get; set; }
         public ulong? Actual_Time { get; set; }
         public ulong? Predicted_Time { get; set; }
-        
+
 
         public class TBAMatchAlliances
         {

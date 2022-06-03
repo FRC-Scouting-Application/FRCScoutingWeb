@@ -1,4 +1,4 @@
-﻿namespace FRCScouting_API.Models
+﻿namespace Models.Other
 {
     public class Media
     {

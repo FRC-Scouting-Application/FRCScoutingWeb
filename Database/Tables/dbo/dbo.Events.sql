@@ -9,7 +9,7 @@ CREATE TABLE [dbo].[Events] (
 	PostalCode VARCHAR(50) NULL,
 	LocationName VARCHAR(MAX) NULL,
 	Website VARCHAR(MAX) NULL,
-	Start_Date DATE NOT NULL,
+	StartDate DATE NOT NULL,
 	EndDate DATE NOT NULL,
 	Year INT NOT NULL,
 	EventType VARCHAR(50) NOT NULL,

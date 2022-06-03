@@ -1,5 +1,5 @@
-﻿using FRCScouting_API.Models;
-using Microsoft.ApplicationInsights;
+﻿using Microsoft.ApplicationInsights;
+using Models.Dbo;
 
 namespace FRCScouting_API.Services
 {
@@ -46,9 +46,9 @@ namespace FRCScouting_API.Services
                 {
                     var e = eventsStack.Pop();
 
-                    if (e.Key == null)
+                    if (e.Id == null)
                     {
-                        e.Key = $"custom-{Guid.NewGuid()}";
+                        e.Id = $"custom-{Guid.NewGuid()}";
                     }
 
                     var index = existing.IndexOf(e);
@@ -118,9 +118,9 @@ namespace FRCScouting_API.Services
                 {
                     var team = teamsStack.Pop();
 
-                    if (team.Key == null)
+                    if (team.Id == null)
                     {
-                        team.Key = $"custom-{Guid.NewGuid()}";
+                        team.Id = $"custom-{Guid.NewGuid()}";
                     }
 
                     var index = existing.IndexOf(team);
@@ -184,9 +184,9 @@ namespace FRCScouting_API.Services
                 {
                     var match = matchesStack.Pop();
 
-                    if (match.Key == null)
+                    if (match.Id == null)
                     {
-                        match.Key = $"custom-{Guid.NewGuid()}";
+                        match.Id = $"custom-{Guid.NewGuid()}";
                     }
 
                     var index = existing.IndexOf(match);
@@ -265,7 +265,6 @@ namespace FRCScouting_API.Services
                         {
                             var maxVersion = (existing.Where(t => t.Id == template.Id)).Max(t => t.Version);
                             template.Version = maxVersion + 1;
-                            template.Created = DateTime.Now;
 
                             update.Add(template);
                         }   
