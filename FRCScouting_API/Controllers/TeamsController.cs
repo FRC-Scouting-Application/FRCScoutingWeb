@@ -1,7 +1,7 @@
-﻿using FRCScouting_API.Models;
-using FRCScouting_API.Services;
-using Microsoft.AspNetCore.Http;
+﻿using FRCScouting_API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Models.Dbo;
+using Models.Other;
 
 namespace FRCScouting_API.Controllers
 {
@@ -79,7 +79,7 @@ namespace FRCScouting_API.Controllers
                 return BadRequest();
 
             foreach (var t in teams)
-                t.Key = null;
+                t.Id = null;
 
             var sucsess = await _repository.AddTeamsAsync(teams);
             if (!sucsess)

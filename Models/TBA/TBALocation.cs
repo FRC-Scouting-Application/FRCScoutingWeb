@@ -1,4 +1,4 @@
-﻿namespace FRCScouting_API.Models.TBA
+﻿namespace Models.TBA
 {
     public class TBALocation
     {

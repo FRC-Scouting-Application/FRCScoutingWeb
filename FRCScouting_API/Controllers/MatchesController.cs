@@ -1,7 +1,6 @@
-﻿using FRCScouting_API.Models;
-using FRCScouting_API.Services;
-using Microsoft.AspNetCore.Http;
+﻿using FRCScouting_API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Models.Dbo;
 
 namespace FRCScouting_API.Controllers
 {
@@ -44,7 +43,7 @@ namespace FRCScouting_API.Controllers
                 return BadRequest();
 
             foreach (var m in matches)
-                m.Key = null;
+                m.Id = null;
 
             var sucsess = await _repository.AddMatchesAsync(matches);
             if (!sucsess)

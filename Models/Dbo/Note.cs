@@ -1,12 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Models.Dbo.Bases;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FRCScouting_API.Models
+namespace Models.Dbo
 {
     public class Note : ScoutBase
     {
         [Required]
-        [Column("text")]
         public string? Text { get; set; }
 
         public bool NeedsUpdate(Note note)

@@ -1,12 +1,9 @@
 ﻿using FRCScouting_API.Models;
-using FRCScouting_API.Models.TBA;
 using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Options;
+using Models.Dbo;
+using Models.TBA;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using SixLabors.ImageSharp;
-using System.Collections.Generic;
-using System.Drawing;
 
 namespace FRCScouting_API.Services
 {
@@ -46,7 +43,7 @@ namespace FRCScouting_API.Services
                 {
                     events.Add(new()
                     {
-                        Key = tbaEvent.Key,
+                        Id = tbaEvent.Key,
                         Name = tbaEvent.Name,
                         ShortName = tbaEvent.Short_Name,
                         City = tbaEvent.City,
@@ -80,8 +77,8 @@ namespace FRCScouting_API.Services
             var tasks = new List<Task<IList<Match>?>>();
             foreach (var e in events)
             {
-                if (e.Key == null) continue;
-                tasks.Add(GetMatchesAsync(e.Key));
+                if (e.Id == null) continue;
+                tasks.Add(GetMatchesAsync(e.Id));
             }
 
             await Task.WhenAll(tasks);
@@ -114,7 +111,7 @@ namespace FRCScouting_API.Services
                 {
                     matches.Add(new()
                     {
-                        Key = tbaMatch.Key,
+                        Id = tbaMatch.Key,
                         MatchNumber = tbaMatch.Match_Number ?? -1,
                         EventKey = tbaMatch.Event_Key ?? eventKey,
                         Red1 = tbaMatch.Alliances?.Red?.Team_Keys?[0] ?? "",
@@ -223,7 +220,7 @@ namespace FRCScouting_API.Services
 
                     teams.Add(new()
                     {
-                        Key = tbaTeam.Key,
+                        Id = tbaTeam.Key,
                         TeamNumber = tbaTeam.Team_number ?? -1,
                         Nickname = tbaTeam.Nickname,
                         Name = tbaTeam.Name,

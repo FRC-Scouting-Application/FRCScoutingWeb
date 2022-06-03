@@ -1,7 +1,6 @@
-﻿using FRCScouting_API.Models;
-using FRCScouting_API.Services;
-using Microsoft.AspNetCore.Http;
+﻿using FRCScouting_API.Services;
 using Microsoft.AspNetCore.Mvc;
+using Models.Dbo;
 
 namespace FRCScouting_API.Controllers
 {
