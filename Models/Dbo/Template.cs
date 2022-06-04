@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Models.Dbo.Bases;
+using Models.Dbo.Interfaces;
+using Models.Helpers;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Dbo
 {
-    public class Template
+    public class Template : DboBase, INeedsUpdate<Template>
     {
         [Key]
         public int Id { get; set; }
@@ -24,10 +27,9 @@ namespace Models.Dbo
         [Column("xml")]
         public byte[]? XML { get; set; }
 
-        public bool NeedsUpdate(Template template)
+        public bool NeedsUpdate(Template obj)
         {
-            return !(template.Id == Id && template.Version == Version && template.Type == Type &&
-                    template.Name == Name && template.DefaultTemplate == DefaultTemplate && template.XML == XML);
+            return NeedsUpdateHelper.NeedsUpdate(this, obj);
         }
     }
 }

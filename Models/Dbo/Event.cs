@@ -1,10 +1,12 @@
 ﻿using Models.Dbo.Bases;
+using Models.Dbo.Interfaces;
+using Models.Helpers;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Dbo
 {
-    public class Event : Location
+    public class Event : DboBase, ILocation, INeedsUpdate<Event>
     {
         [Key]
         public string? Id { get; set; }
@@ -31,24 +33,19 @@ namespace Models.Dbo
 
         public int Week { get; set; }
 
-        public override bool Equals(object obj)
-        {
-            if (obj is null || obj is not Event)
-                return false;
+        #region Location
+        public string? City { get; set; }
+        public string? StateProv { get; set; }
+        public string? Country { get; set; }
+        public string? Address { get; set; }
+        public string? PostalCode { get; set; }
+        public string? LocationName { get; set; }
+        public string? Website { get; set; }
+        #endregion Location
 
-            Event? e = obj as Event;
-            if (e == null) return false;
-            return e.Id == this.Id;
-        }
-
-        public bool NeedsUpdate(Event e)
+        public bool NeedsUpdate(Event obj)
         {
-            return !(e.Id == Id && e.Name == Name && e.ShortName == ShortName && 
-                e.StartDate == StartDate && e.EndDate == EndDate && e.Year == Year &&
-                e.EventType == EventType && e.Week == Week &&
-                e.City == City && e.StateProv == StateProv && e.Country == Country &&
-                e.Address == Address && e.PostalCode == PostalCode &&
-                e.LocationName == LocationName && e.Website == Website);
+            return NeedsUpdateHelper.NeedsUpdate(this, obj);
         }
     }
 }

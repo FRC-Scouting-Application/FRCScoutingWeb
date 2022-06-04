@@ -1,10 +1,12 @@
 ﻿using Models.Dbo.Bases;
+using Models.Dbo.Interfaces;
+using Models.Helpers;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Dbo
 {
-    public class Team : Location
+    public class Team : DboBase, ILocation, INeedsUpdate<Team>
     {
         [Key]
         public string? Id { get; set; }
@@ -19,24 +21,19 @@ namespace Models.Dbo
 
         public int RookieYear { get; set; }
 
+        #region Location
+        public string? City { get; set; }
+        public string? StateProv { get; set; }
+        public string? Country { get; set; }
+        public string? Address { get; set; }
+        public string? PostalCode { get; set; }
+        public string? LocationName { get; set; }
+        public string? Website { get; set; }
+        #endregion Location
 
-        public override bool Equals(object obj)
+        public bool NeedsUpdate(Team obj)
         {
-            if (obj is null || obj is not Team)
-                return false;
-
-            Team? team = obj as Team;
-            if (team == null) return false;
-            return team.Id == Id;
-        }
-
-        public bool NeedsUpdate(Team team)
-        {
-            return !(team.Id == Id && team.TeamNumber == TeamNumber && team.Nickname == Nickname &&
-                team.Name == Name && team.RookieYear == RookieYear &&
-                team.City == City && team.StateProv == StateProv && team.Country == Country &&
-                team.Address == Address && team.PostalCode == PostalCode &&
-                team.LocationName == LocationName && team.Website == Website);
+            return NeedsUpdateHelper.NeedsUpdate(this, obj);
         }
     }
 }

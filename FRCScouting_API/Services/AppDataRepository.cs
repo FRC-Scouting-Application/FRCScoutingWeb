@@ -51,17 +51,15 @@ namespace FRCScouting_API.Services
                         e.Id = $"custom-{Guid.NewGuid()}";
                     }
 
-                    var index = existing.IndexOf(e);
+                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == e.Id).First();
 
-                    if (index == -1)
+                    if (existingItem == null)
                     {
                         add.Add(e);
                     }
                     else
                     {
-                        var match = existing[index];
-
-                        if (match.NeedsUpdate(e))
+                        if (existingItem.NeedsUpdate(e))
                             update.Add(e);
                     }
                 }
@@ -123,18 +121,17 @@ namespace FRCScouting_API.Services
                         team.Id = $"custom-{Guid.NewGuid()}";
                     }
 
-                    var index = existing.IndexOf(team);
+                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == team.Id).First();
 
-                    if (index == -1)
+                    if (existingItem == null)
                     {
                         add.Add(team);
-                    }  
-                    else {
-                        var match = existing[index];
-
-                        if (match.NeedsUpdate(team))
+                    }
+                    else
+                    {
+                        if (existingItem.NeedsUpdate(team))
                             update.Add(team);
-                    }                 
+                    }
                 }
 
                 await _dbContext.Teams.AddRangeAsync(add);
@@ -189,17 +186,15 @@ namespace FRCScouting_API.Services
                         match.Id = $"custom-{Guid.NewGuid()}";
                     }
 
-                    var index = existing.IndexOf(match);
+                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == match.Id).First();
 
-                    if (index == -1)
+                    if (existingItem == null)
                     {
                         add.Add(match);
                     }
                     else
                     {
-                        var matched = existing[index];
-
-                        if (match.NeedsUpdate(match))
+                        if (existingItem.NeedsUpdate(match))
                             update.Add(match);
                     }
                 }
@@ -251,23 +246,21 @@ namespace FRCScouting_API.Services
                 {
                     var template = templateStack.Pop();
 
-                    var index = existing.IndexOf(template);
+                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == template.Id).First();
 
-                    if (index == -1)
+                    if (existingItem == null)
                     {
                         add.Add(template);
                     }
                     else
                     {
-                        var matched = existing[index];
-
-                        if (template.NeedsUpdate(template))
+                        if (existingItem.NeedsUpdate(template))
                         {
                             var maxVersion = (existing.Where(t => t.Id == template.Id)).Max(t => t.Version);
                             template.Version = maxVersion + 1;
 
                             update.Add(template);
-                        }   
+                        }
                     }
                 }
 
@@ -334,18 +327,18 @@ namespace FRCScouting_API.Services
                 {
                     var scout = scoutStack.Pop();
 
-                    var index = existing.IndexOf(scout);
+                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == scout.Id).First();
 
-                    if (index == -1)
+                    if (existingItem == null)
                     {
                         add.Add(scout);
                     }
                     else
                     {
-                        var matched = existing[index];
-
-                        if (scout.NeedsUpdate(scout))
+                        if (existingItem.NeedsUpdate(scout))
+                        {
                             update.Add(scout);
+                        }
                     }
                 }
 
@@ -412,18 +405,18 @@ namespace FRCScouting_API.Services
                 {
                     var note = noteStack.Pop();
 
-                    var index = existing.IndexOf(note);
+                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == note.Id).First();
 
-                    if (index == -1)
+                    if (existingItem == null)
                     {
                         add.Add(note);
                     }
                     else
                     {
-                        var matched = existing[index];
-
-                        if (note.NeedsUpdate(note))
+                        if (existingItem.NeedsUpdate(note))
+                        {
                             update.Add(note);
+                        }
                     }
                 }
 

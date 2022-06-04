@@ -2,7 +2,7 @@
 
 namespace Models.Dbo.Bases
 {
-    public class ScoutBase
+    public class ScoutBase : DboBase
     {
         [Key]
         public int Id { get; set; }

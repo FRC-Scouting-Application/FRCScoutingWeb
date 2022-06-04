@@ -66,7 +66,7 @@ builder.Services.AddSwaggerGen(c =>
         Title = info.Title,
         Version = $"v{info.Version}",
         Description = info.Description
-    });
+    });  
 });
 
 // Applicaton Insights
@@ -91,6 +91,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint($"/swagger/v{info.Version}/swagger.json", info.Title);
+    c.InjectStylesheet("/swagger-ui/SwaggerDark.css");
 });
 
 app.UseEndpoints(endpoints =>
@@ -99,4 +100,5 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
+app.UseStaticFiles();
 app.Run();
