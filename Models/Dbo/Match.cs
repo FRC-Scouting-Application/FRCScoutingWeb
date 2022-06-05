@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Models.Dbo
 {
-    public class Match : DboBase, INeedsUpdate<Match>
+    public class Match : DboBase, INeedsUpdate<Match>, IKey<string>
     {
         [Key]
         public string? Id { get; set; }

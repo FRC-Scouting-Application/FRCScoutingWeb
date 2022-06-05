@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Dbo
 {
-    public class Event : DboBase, ILocation, INeedsUpdate<Event>
+    public class Event : DboBase, ILocation, INeedsUpdate<Event>, IKey<string>
     {
         [Key]
         public string? Id { get; set; }

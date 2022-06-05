@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Dbo
 {
-    public class Template : DboBase, INeedsUpdate<Template>
+    public class Template : DboBase, INeedsUpdate<Template>, IKey<int>
     {
         [Key]
         public int Id { get; set; }

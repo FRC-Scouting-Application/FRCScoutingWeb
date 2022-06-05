@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Dbo
 {
-    public class Team : DboBase, ILocation, INeedsUpdate<Team>
+    public class Team : DboBase, ILocation, INeedsUpdate<Team>, IKey<string>
     {
         [Key]
         public string? Id { get; set; }

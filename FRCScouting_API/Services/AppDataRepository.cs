@@ -1,4 +1,5 @@
-﻿using Microsoft.ApplicationInsights;
+﻿using FRCScouting_API.Helpers;
+using Microsoft.ApplicationInsights;
 using Models.Dbo;
 
 namespace FRCScouting_API.Services
@@ -36,38 +37,12 @@ namespace FRCScouting_API.Services
         {
             try
             {
-                var eventsStack = new Stack<Event>(events);
-                var existing = _dbContext.Events.ToList();
+                foreach (var item in events)
+                    if (item.Id == null)
+                        item.Id = $"custom-{Guid.NewGuid()}";
 
-                var add = new List<Event>();
-                var update = new List<Event>();
+                EFHelper.AddUpdateRange<Event, string>(_dbContext.Events, events);
 
-                while (eventsStack.Count > 0)
-                {
-                    var e = eventsStack.Pop();
-
-                    if (e.Id == null)
-                    {
-                        e.Id = $"custom-{Guid.NewGuid()}";
-                    }
-
-                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == e.Id).First();
-
-                    if (existingItem == null)
-                    {
-                        add.Add(e);
-                    }
-                    else
-                    {
-                        if (existingItem.NeedsUpdate(e))
-                            update.Add(e);
-                    }
-                }
-
-                await _dbContext.Events.AddRangeAsync(add);
-                await _dbContext.SaveChangesAsync();
-
-                _dbContext.Events.UpdateRange(update);
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
@@ -106,38 +81,12 @@ namespace FRCScouting_API.Services
         {
             try
             {
-                var teamsStack = new Stack<Team>(teams);
-                var existing = _dbContext.Teams.ToList();
+                foreach (var item in teams)
+                    if (item.Id == null)
+                        item.Id = $"custom-{Guid.NewGuid()}";
 
-                var add = new List<Team>();
-                var update = new List<Team>();
+                EFHelper.AddUpdateRange<Team, string>(_dbContext.Teams, teams);
 
-                while (teamsStack.Count > 0)
-                {
-                    var team = teamsStack.Pop();
-
-                    if (team.Id == null)
-                    {
-                        team.Id = $"custom-{Guid.NewGuid()}";
-                    }
-
-                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == team.Id).First();
-
-                    if (existingItem == null)
-                    {
-                        add.Add(team);
-                    }
-                    else
-                    {
-                        if (existingItem.NeedsUpdate(team))
-                            update.Add(team);
-                    }
-                }
-
-                await _dbContext.Teams.AddRangeAsync(add);
-                await _dbContext.SaveChangesAsync();
-
-                _dbContext.Teams.UpdateRange(update);
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
@@ -171,38 +120,12 @@ namespace FRCScouting_API.Services
         {
             try
             {
-                var matchesStack = new Stack<Match>(matches);
-                var existing = _dbContext.Matches.ToList();
+                foreach (var item in matches)
+                    if (item.Id == null)
+                        item.Id = $"custom-{Guid.NewGuid()}";
 
-                var add = new List<Match>();
-                var update = new List<Match>();
+                EFHelper.AddUpdateRange<Match, string>(_dbContext.Matches, matches);
 
-                while (matchesStack.Count > 0)
-                {
-                    var match = matchesStack.Pop();
-
-                    if (match.Id == null)
-                    {
-                        match.Id = $"custom-{Guid.NewGuid()}";
-                    }
-
-                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == match.Id).First();
-
-                    if (existingItem == null)
-                    {
-                        add.Add(match);
-                    }
-                    else
-                    {
-                        if (existingItem.NeedsUpdate(match))
-                            update.Add(match);
-                    }
-                }
-
-                await _dbContext.Matches.AddRangeAsync(add);
-                await _dbContext.SaveChangesAsync();
-
-                _dbContext.Matches.UpdateRange(update);
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
@@ -236,38 +159,8 @@ namespace FRCScouting_API.Services
         {
             try
             {
-                var templateStack = new Stack<Template>(templates);
-                var existing = _dbContext.Templates.ToList();
+                EFHelper.AddUpdateRange<Template, int>(_dbContext.Templates, templates);
 
-                var add = new List<Template>();
-                var update = new List<Template>();
-
-                while (templateStack.Count > 0)
-                {
-                    var template = templateStack.Pop();
-
-                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == template.Id).First();
-
-                    if (existingItem == null)
-                    {
-                        add.Add(template);
-                    }
-                    else
-                    {
-                        if (existingItem.NeedsUpdate(template))
-                        {
-                            var maxVersion = (existing.Where(t => t.Id == template.Id)).Max(t => t.Version);
-                            template.Version = maxVersion + 1;
-
-                            update.Add(template);
-                        }
-                    }
-                }
-
-                await _dbContext.Templates.AddRangeAsync(add);
-                await _dbContext.SaveChangesAsync();
-
-                _dbContext.Templates.UpdateRange(update);
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
@@ -317,35 +210,8 @@ namespace FRCScouting_API.Services
         {
             try
             {
-                var scoutStack = new Stack<Scout>(scouts);
-                var existing = _dbContext.Scouts.ToList();
+                EFHelper.AddUpdateRange<Scout, int>(_dbContext.Scouts, scouts);
 
-                var add = new List<Scout>();
-                var update = new List<Scout>();
-
-                while (scoutStack.Count > 0)
-                {
-                    var scout = scoutStack.Pop();
-
-                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == scout.Id).First();
-
-                    if (existingItem == null)
-                    {
-                        add.Add(scout);
-                    }
-                    else
-                    {
-                        if (existingItem.NeedsUpdate(scout))
-                        {
-                            update.Add(scout);
-                        }
-                    }
-                }
-
-                await _dbContext.Scouts.AddRangeAsync(add);
-                await _dbContext.SaveChangesAsync();
-
-                _dbContext.Scouts.UpdateRange(update);
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
@@ -395,35 +261,8 @@ namespace FRCScouting_API.Services
         {
             try
             {
-                var noteStack = new Stack<Note>(notes);
-                var existing = _dbContext.Notes.ToList();
+                EFHelper.AddUpdateRange<Note, int>(_dbContext.Notes, notes);
 
-                var add = new List<Note>();
-                var update = new List<Note>();
-
-                while (noteStack.Count > 0)
-                {
-                    var note = noteStack.Pop();
-
-                    var existingItem = existing.Count == 0 ? null : existing.Where(a => a.Id == note.Id).First();
-
-                    if (existingItem == null)
-                    {
-                        add.Add(note);
-                    }
-                    else
-                    {
-                        if (existingItem.NeedsUpdate(note))
-                        {
-                            update.Add(note);
-                        }
-                    }
-                }
-
-                await _dbContext.Notes.AddRangeAsync(add);
-                await _dbContext.SaveChangesAsync();
-
-                _dbContext.Notes.UpdateRange(update);
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
