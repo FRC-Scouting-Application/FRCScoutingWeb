@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Models.Dbo.Bases
+namespace Models.Dbo.Interfaces
 {
-    public class Location
+    public interface ILocation
     {
         [MaxLength(255)]
         public string? City { get; set; }

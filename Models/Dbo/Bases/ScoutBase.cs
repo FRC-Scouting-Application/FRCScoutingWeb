@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Models.Dbo.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models.Dbo.Bases
 {
-    public class ScoutBase
+    public class ScoutBase : DboBase, IKey<int>
     {
         [Key]
         public int Id { get; set; }
