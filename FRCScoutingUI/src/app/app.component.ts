@@ -15,7 +15,7 @@ export class AppComponent {
     }, error => console.error(error));
   }
 
-  title = 'FRCScouting_Web';
+  title = 'FRCScoutingUI';
 }
 
 interface WeatherForecast {

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{EA8576C6-45FB-4DD2-9951-176699F5BB41}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "FRCScouting_Web", "FRCScouting_Web\FRCScouting_Web.esproj", "{05434808-4AAE-47DB-9697-C4CD3361F46E}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "FRCScoutingUI", "FRCScoutingUI\FRCScoutingUI.esproj", "{47B58D94-881D-4094-A6C0-46D6FAC32D0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +29,12 @@ Global
 		{EA8576C6-45FB-4DD2-9951-176699F5BB41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA8576C6-45FB-4DD2-9951-176699F5BB41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA8576C6-45FB-4DD2-9951-176699F5BB41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05434808-4AAE-47DB-9697-C4CD3361F46E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05434808-4AAE-47DB-9697-C4CD3361F46E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05434808-4AAE-47DB-9697-C4CD3361F46E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{05434808-4AAE-47DB-9697-C4CD3361F46E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05434808-4AAE-47DB-9697-C4CD3361F46E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05434808-4AAE-47DB-9697-C4CD3361F46E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{47B58D94-881D-4094-A6C0-46D6FAC32D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47B58D94-881D-4094-A6C0-46D6FAC32D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47B58D94-881D-4094-A6C0-46D6FAC32D0D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{47B58D94-881D-4094-A6C0-46D6FAC32D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47B58D94-881D-4094-A6C0-46D6FAC32D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47B58D94-881D-4094-A6C0-46D6FAC32D0D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

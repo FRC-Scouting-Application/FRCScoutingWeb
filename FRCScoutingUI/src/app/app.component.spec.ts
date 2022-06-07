@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'FRCScouting_Web'`, () => {
+  it(`should have as title 'FRCScoutingUI'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('FRCScouting_Web');
+    expect(app.title).toEqual('FRCScoutingUI');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('FRCScouting_Web app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('FRCScoutingUI app is running!');
   });
 });
