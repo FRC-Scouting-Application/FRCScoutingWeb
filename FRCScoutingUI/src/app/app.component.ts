@@ -1,26 +1,32 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from './root-store';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  public forecasts?: WeatherForecast[];
+export class AppComponent implements OnInit {
 
-  constructor(http: HttpClient) {
-    http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+  constructor(
+    private store: Store<RootStoreState.State>
+  ) { }
+
+  ngOnInit() {
+    /*this.store.pipe(select(ScoutStoreSelectors.selectEvents)).subscribe({
+      next: (res: any) => {
+        console.log(res);
+      },
+      error: (() => {
+        console.error("Failed to get Events!");
+      })
+    })*/
   }
 
-  title = 'FRCScoutingUI';
-}
+  onClick() {
+    this.store.dispatch(ScoutStoreActions.getEventsRequest());
+  }
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
 }
