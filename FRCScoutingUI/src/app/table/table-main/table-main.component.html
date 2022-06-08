@@ -1,0 +1,30 @@
+
+<div *ngIf="def && def.data && def.data.length > 0">
+  <table mat-table [dataSource]="def.data" class="mat-elevation-z8">
+
+    <div *ngIf="def">
+      <div *ngFor="let col of def.colDef; let i = index">
+
+        <ng-container matColumnDef="{{col.name}}">
+          <th mat-header-cell *matHeaderCellDef>
+            {{col.display}}
+            <span class="resize-handle"></span>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element[col.name]}} </td>
+        </ng-container>
+
+      </div>
+    </div>
+
+    <!--
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element['name']}} </td>
+    </ng-container>
+     -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+

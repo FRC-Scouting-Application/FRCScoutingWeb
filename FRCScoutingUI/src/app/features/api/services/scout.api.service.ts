@@ -29,7 +29,9 @@ class ScoutAPIService extends BaseService {
       }
     );
 
-    return this.http.request<any>(req).lift(
+    return this.http.request<any>(req).pipe(
+      // @ts-ignore
+      filter(_r => _r instanceof HttpResponse),
       map((_r: HttpResponse<any>) => {
         return _r as StrictHttpResponse<Array<Event>>;
       })

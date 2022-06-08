@@ -2,7 +2,6 @@ import { createReducer, on } from "@ngrx/store";
 import { getEventsRequest, getEventsSuccess } from "./actions";
 import { initialState } from "./state";
 
-
 const scoutReducer = createReducer(
 
   initialState,

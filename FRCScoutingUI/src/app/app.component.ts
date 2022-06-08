@@ -8,25 +8,6 @@ import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from './root-s
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-
-  constructor(
-    private store: Store<RootStoreState.State>
-  ) { }
-
-  ngOnInit() {
-    /*this.store.pipe(select(ScoutStoreSelectors.selectEvents)).subscribe({
-      next: (res: any) => {
-        console.log(res);
-      },
-      error: (() => {
-        console.error("Failed to get Events!");
-      })
-    })*/
-  }
-
-  onClick() {
-    this.store.dispatch(ScoutStoreActions.getEventsRequest());
-  }
+export class AppComponent {
 
 }

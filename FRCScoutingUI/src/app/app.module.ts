@@ -7,6 +7,13 @@ import { AppComponent } from './app.component';
 import { ApiModule } from './features/api/api.module';
 import { RootStoreModule } from './root-store/root-store.module';
 import { AppConfigService } from './services/app-config.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EventsComponent } from './data/events/events.component';
+import { TableMainComponent } from './table/table-main/table-main.component';
+import { HeaderComponent } from './main/header/header.component';
+import { FooterComponent } from './main/footer/footer.component';
+
+import { MatTableModule } from '@angular/material/table';
 
 export function initializeApp(appConfigService: AppConfigService) {
   return (): Promise<any> => {
@@ -30,13 +37,19 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EventsComponent,
+    TableMainComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RootStoreModule,
-    ApiModule
+    ApiModule,
+    BrowserAnimationsModule,
+    MatTableModule
   ],
   providers: [
     AppConfigService,
