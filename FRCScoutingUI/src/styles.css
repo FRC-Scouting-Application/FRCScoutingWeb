@@ -1,12 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 
   position: relative;
   min-height: 100vh;
+
+  
 }
 
 main {
@@ -14,10 +19,9 @@ main {
 }
 
 footer {
-  background-color: lightgray;
-
-  position: absolute;
-  bottom: 0;
-  width: 100%;
   height: 100px;
+}
+
+.dropdown.active .dropdown-toggle {
+  color: rgba(0,0,0,.9);
 }

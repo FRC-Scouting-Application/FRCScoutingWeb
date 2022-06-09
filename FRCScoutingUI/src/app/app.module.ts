@@ -8,12 +8,17 @@ import { ApiModule } from './features/api/api.module';
 import { RootStoreModule } from './root-store/root-store.module';
 import { AppConfigService } from './services/app-config.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EventsComponent } from './data/events/events.component';
-import { TableMainComponent } from './table/table-main/table-main.component';
 import { HeaderComponent } from './main/header/header.component';
 import { FooterComponent } from './main/footer/footer.component';
 
 import { MatTableModule } from '@angular/material/table';
+import { AgGridModule } from 'ag-grid-angular';
+import { ContentNavComponent } from './results/content-nav/content-nav.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { EventsComponent } from './pages/events/events.component';
+import { AppRoutingModule } from './app.routing.module';
+import { TeamsComponent } from './pages/teams/teams.component';
+import { MatchesComponent } from './pages/matches/matches.component';
 
 export function initializeApp(appConfigService: AppConfigService) {
   return (): Promise<any> => {
@@ -38,10 +43,15 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
 @NgModule({
   declarations: [
     AppComponent,
-    EventsComponent,
-    TableMainComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ContentNavComponent,
+
+    /* Pages */
+    LandingPageComponent,
+    EventsComponent,
+    TeamsComponent,
+    MatchesComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +59,9 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
     RootStoreModule,
     ApiModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    AppRoutingModule,
+    AgGridModule
   ],
   providers: [
     AppConfigService,

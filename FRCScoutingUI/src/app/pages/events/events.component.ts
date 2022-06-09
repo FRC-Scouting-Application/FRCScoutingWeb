@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { EventColDef } from '../../features/api/models/dbo-table-defs';
+import { AgGridAngular } from 'ag-grid-angular';
+import { ColDef, ColGroupDef, GridReadyEvent } from 'ag-grid-community';
+import { Observable } from 'rxjs';
+import { eventColDefs, locationColDefs } from '../../results/col-defs';
 import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '../../root-store';
-import { TableDef } from '../../table/table-main/table-main.component';
+import { Event } from "../../features/api/models/dbo-models";
 
 @Component({
   selector: 'app-events',
@@ -15,8 +18,8 @@ export class EventsComponent implements OnInit {
     private store: Store<RootStoreState.State>
   ) { }
 
-  private events?: Event[];
-  public tableDef?: TableDef;
+  public events: Event[] = [];
+  public columnDefs: ColGroupDef[] = eventColDefs;
 
   ngOnInit() {
     this.getEvents();
@@ -29,23 +32,12 @@ export class EventsComponent implements OnInit {
       next: (events: Event[]) => {
         if (events && events.length > 0) {
           this.events = events;
-          this.createTableDef();
         }
       },
-      error: (() => {
+      error: () => {
         console.error("Failed to get Events!");
-      })
+      }
     });
-  }
-
-  createTableDef() {
-    let def: TableDef = {
-      data: this.events,
-      colDef: EventColDef,
-      displayCols: ['name', 'year', 'city']
-    };
-
-    this.tableDef = def;
   }
 
 }

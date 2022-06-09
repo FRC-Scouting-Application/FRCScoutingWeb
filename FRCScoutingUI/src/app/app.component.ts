@@ -8,6 +8,20 @@ import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from './root-s
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  constructor(
+    private store: Store<RootStoreState.State>
+  ) { }
+
+  ngOnInit() {
+    this.getAllData();
+  }
+
+  getAllData() {
+    this.store.dispatch(ScoutStoreActions.getEventsRequest());
+    this.store.dispatch(ScoutStoreActions.getTeamsRequest());
+    this.store.dispatch(ScoutStoreActions.getMatchesRequest());
+  }
 
 }
