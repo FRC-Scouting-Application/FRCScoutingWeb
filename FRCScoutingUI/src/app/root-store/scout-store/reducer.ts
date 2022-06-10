@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { getEventsRequest, getEventsSuccess, getMatchesRequest, getMatchesSuccess, getTeamsRequest, getTeamsSuccess } from "./actions";
+import { getEventsRequest, getEventsSuccess, getMatchesRequest, getMatchesSuccess, getTeamsRequest, getTeamsSuccess, getTemplatesRequest, getTemplatesSuccess } from "./actions";
 import { initialState } from "./state";
 
 const scoutReducer = createReducer(
@@ -52,6 +52,23 @@ const scoutReducer = createReducer(
     return ({
       ...state,
       matches: payload,
+      loading: false,
+      error: null
+    })
+  }),
+
+  on(getTemplatesRequest, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      error: null
+    })
+  }),
+
+  on(getTemplatesSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      templates: payload,
       loading: false,
       error: null
     })

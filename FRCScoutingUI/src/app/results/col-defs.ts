@@ -106,3 +106,12 @@ export const matchesColDefs: ColGroupDef[] = [
     ]
   }
 ]
+
+export const templatesColDefs: ColDef[] = [
+  { field: 'id' },
+  { field: 'version' },
+  { field: 'type' },
+  { field: 'name' },
+  { field: 'defaultTemplate' },
+  { field: 'xml', hide: true }
+]

@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Event, Match, Team } from "../../features/api/models/dbo-models";
+import { Event, Match, Team, Template } from "../../features/api/models/dbo-models";
 
 
 export const getEventsRequest = createAction(
@@ -30,6 +30,17 @@ export const getMatchesSuccess = createAction(
   '[Scout] Get Matches Success',
   props<{ payload: Match[] }>()
 );
+
+
+export const getTemplatesRequest = createAction(
+  '[Scout] Get Templates Request'
+);
+
+export const getTemplatesSuccess = createAction(
+  '[Scout] Get Templates Success',
+  props<{ payload: Template[] }>()
+)
+
 
 export const failure = createAction(
   '[Scout] Failure',

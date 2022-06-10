@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(ScoutStoreActions.getEventsRequest());
     this.store.dispatch(ScoutStoreActions.getTeamsRequest());
     this.store.dispatch(ScoutStoreActions.getMatchesRequest());
+    this.store.dispatch(ScoutStoreActions.getTemplatesRequest());
   }
 
 }

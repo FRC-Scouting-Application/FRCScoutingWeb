@@ -1,17 +1,14 @@
 import { HttpClientModule, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_INITIALIZER, Injectable, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { map, Observable } from 'rxjs';
 
 import { AppComponent } from './app.component';
 import { ApiModule } from './features/api/api.module';
 import { RootStoreModule } from './root-store/root-store.module';
 import { AppConfigService } from './services/app-config.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './main/header/header.component';
 import { FooterComponent } from './main/footer/footer.component';
 
-import { MatTableModule } from '@angular/material/table';
 import { AgGridModule } from 'ag-grid-angular';
 import { ContentNavComponent } from './results/content-nav/content-nav.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
@@ -19,6 +16,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { AppRoutingModule } from './app.routing.module';
 import { TeamsComponent } from './pages/teams/teams.component';
 import { MatchesComponent } from './pages/matches/matches.component';
+import { MaterialModule } from './material.module';
 
 export function initializeApp(appConfigService: AppConfigService) {
   return (): Promise<any> => {
@@ -41,7 +39,7 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
 }
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -51,17 +49,15 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
     LandingPageComponent,
     EventsComponent,
     TeamsComponent,
-    MatchesComponent
-  ],
+    MatchesComponent,
+   ],
   imports: [
-    BrowserModule,
     HttpClientModule,
     RootStoreModule,
     ApiModule,
-    BrowserAnimationsModule,
-    MatTableModule,
     AppRoutingModule,
-    AgGridModule
+    AgGridModule,
+    MaterialModule,
   ],
   providers: [
     AppConfigService,
