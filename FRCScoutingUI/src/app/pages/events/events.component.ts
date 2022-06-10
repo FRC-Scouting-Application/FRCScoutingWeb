@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, ColGroupDef, GridReadyEvent } from 'ag-grid-community';
-import { Observable } from 'rxjs';
-import { eventColDefs, locationColDefs } from '../../results/col-defs';
+import { ColGroupDef} from 'ag-grid-community';
+import { eventColDefs } from '../../results/col-defs';
 import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '../../root-store';
 import { Event } from "../../features/api/models/dbo-models";
 

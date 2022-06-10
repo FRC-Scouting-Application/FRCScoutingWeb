@@ -1,0 +1,11 @@
+<h1>Templates</h1>
+
+<button mat-raised-button color="primary" (click)="createNewTemplate()">Create new Template</button>
+
+<div class="mt-3">
+  <app-content-nav
+    [columnDefs]="columnDefs"
+    [rowData]="templates"
+  ></app-content-nav>
+</div>
+

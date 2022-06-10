@@ -16,7 +16,11 @@ import { EventsComponent } from './pages/events/events.component';
 import { AppRoutingModule } from './app.routing.module';
 import { TeamsComponent } from './pages/teams/teams.component';
 import { MatchesComponent } from './pages/matches/matches.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from './material.module';
+import { TemplatesComponent } from './pages/templates/templates.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TemplateEditorComponent } from './dialog/template-editor/template-editor.component';
 
 export function initializeApp(appConfigService: AppConfigService) {
   return (): Promise<any> => {
@@ -50,14 +54,20 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
     EventsComponent,
     TeamsComponent,
     MatchesComponent,
+    TemplatesComponent,
+
+    /* Dialogs */
+    TemplateEditorComponent
    ],
   imports: [
+    BrowserModule,
     HttpClientModule,
     RootStoreModule,
     ApiModule,
     AppRoutingModule,
     AgGridModule,
     MaterialModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     AppConfigService,
