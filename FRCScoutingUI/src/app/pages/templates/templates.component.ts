@@ -6,6 +6,7 @@ import { TemplateEditorComponent } from '../../dialog/template-editor/template-e
 import { Template } from '../../features/api/models/dbo-models';
 import { templatesColDefs } from '../../results/col-defs';
 import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '../../root-store';
+import { TemplateXmlService } from '../../services/template-xml.service';
 
 @Component({
   selector: 'app-templates',
@@ -16,7 +17,8 @@ export class TemplatesComponent implements OnInit {
 
   constructor(
     private store: Store<RootStoreState.State>,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private templateXMLService: TemplateXmlService
   ) { }
 
   public templates: Template[] = [];
@@ -24,6 +26,8 @@ export class TemplatesComponent implements OnInit {
 
   ngOnInit() {
     this.getTemplates();
+
+    this.templateXMLService.loadTemplate();
   }
 
   getTemplates() {
