@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { ColGroupDef } from 'ag-grid-community';
-import { Match } from '../../features/api/models/dbo-models';
-import { matchesColDefs } from '../../results/col-defs';
-import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '../../root-store';
+import { Match } from '@app/features/api/models/dbo-models';
+import { matchesColDefs } from '@app/results/col-defs';
+import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '@app/root-store';
 
 @Component({
   selector: 'app-matches',

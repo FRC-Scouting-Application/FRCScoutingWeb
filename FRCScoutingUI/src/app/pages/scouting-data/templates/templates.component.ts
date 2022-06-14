@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { ColDef } from 'ag-grid-community';
-import { TemplateEditorComponent } from '../../dialog/template-editor/template-editor.component';
-import { Template } from '../../features/api/models/dbo-models';
-import { Counter, List, TemplateHelper, TemplateJSON, TextField } from '../../features/template/template';
-import { templatesColDefs } from '../../results/col-defs';
-import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '../../root-store';
+import { TemplateEditorComponent } from '@app/dialog/template-editor/template-editor.component';
+import { Template } from '@app/features/api/models/dbo-models';
+import { Counter, List, TemplateHelper, TemplateJSON, TextField } from '@app/features/template/template';
+import { templatesColDefs } from '@app/results/col-defs';
+import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '@app/root-store';
 
 @Component({
   selector: 'app-templates',

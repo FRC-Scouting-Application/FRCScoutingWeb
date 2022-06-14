@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { ColGroupDef } from 'ag-grid-community';
-import { Team } from '../../features/api/models/dbo-models';
-import { teamsColDefs } from '../../results/col-defs';
-import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '../../root-store';
+import { Team } from '@app/features/api/models/dbo-models';
+import { teamsColDefs } from '@app/results/col-defs';
+import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '@app/root-store';
 
 @Component({
   selector: 'app-teams',
