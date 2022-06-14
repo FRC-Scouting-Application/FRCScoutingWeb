@@ -21,7 +21,7 @@ import { MaterialModule } from './material.module';
 import { TemplatesComponent } from './pages/templates/templates.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TemplateEditorComponent } from './dialog/template-editor/template-editor.component';
-import { TemplateXmlService } from './services/template-xml.service';
+import { TemplateHelper } from './features/template/template';
 
 export function initializeApp(appConfigService: AppConfigService) {
   return (): Promise<any> => {
@@ -72,7 +72,7 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
   ],
   providers: [
     AppConfigService,
-    TemplateXmlService,
+    TemplateHelper,
     { provide: APP_INITIALIZER, useFactory: initializeApp, deps: [AppConfigService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ApiPrefixInterceptor, multi: true }
   ],

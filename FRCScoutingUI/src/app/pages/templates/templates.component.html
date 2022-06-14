@@ -1,6 +1,7 @@
 <h1>Templates</h1>
 
 <button mat-raised-button color="primary" (click)="createNewTemplate()">Create new Template</button>
+<button mat-raised-button color="secondary" class="m-2" (click)="openExamplePit()">Open Example Pit</button>
 
 <div class="mt-3">
   <app-content-nav
@@ -9,3 +10,34 @@
   ></app-content-nav>
 </div>
 
+
+<div *ngIf="temp">
+  <!--
+  <div cdkDropListGroup>
+    <div class="example-container" *ngFor="let section of temp.sections; let i = index">
+      <mat-form-field appearance="fill">
+        <mat-label>Section Header</mat-label>
+        <input matInput placeholder="label" value={{section.header}}>
+      </mat-form-field>
+
+      <div
+         cdkDropList
+         id="section{{ i }}"
+         [cdkDropListData]="section.fields"
+         class="example-list">
+        <div class="example-box" *ngFor="let field of section.fields" cdkDrag>
+          <mat-form-field appearance="fill">
+            <mat-label>{{ field.type }} - Label</mat-label>
+            <input matInput placeholder="label" value={{field.label}}>
+          </mat-form-field>
+          <div [ngSwitch]="field.type">
+            <div *ngSwitchDefault>
+             {{ jsonToString(field) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  -->
+</div>

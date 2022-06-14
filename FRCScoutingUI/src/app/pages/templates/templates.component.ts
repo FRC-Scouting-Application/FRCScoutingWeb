@@ -4,9 +4,9 @@ import { select, Store } from '@ngrx/store';
 import { ColDef } from 'ag-grid-community';
 import { TemplateEditorComponent } from '../../dialog/template-editor/template-editor.component';
 import { Template } from '../../features/api/models/dbo-models';
+import { Counter, List, TemplateHelper, TemplateJSON, TextField } from '../../features/template/template';
 import { templatesColDefs } from '../../results/col-defs';
 import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '../../root-store';
-import { TemplateXmlService } from '../../services/template-xml.service';
 
 @Component({
   selector: 'app-templates',
@@ -18,16 +18,32 @@ export class TemplatesComponent implements OnInit {
   constructor(
     private store: Store<RootStoreState.State>,
     public dialog: MatDialog,
-    private templateXMLService: TemplateXmlService
+    private templateHelper: TemplateHelper
   ) { }
+
+  public todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
   public templates: Template[] = [];
   public columnDefs: ColDef[] = templatesColDefs;
 
+  public temp?: TemplateJSON;
+
   ngOnInit() {
     this.getTemplates();
 
-    this.templateXMLService.loadTemplate();
+    this.templateHelper.loadPitTemplateExample().then((data: TemplateJSON) => {
+      console.log(data);
+      this.temp = data;
+    })
+  }
+
+  jsonToString(json: any): string {
+    return JSON.stringify(json);
+  }
+
+  convertToList(list: (TextField | List | Counter)): List {
+    let newList = list as List;
+    return newList;
   }
 
   getTemplates() {
@@ -46,10 +62,22 @@ export class TemplatesComponent implements OnInit {
   }
 
   createNewTemplate() {
-    const dialogRef = this.dialog.open(TemplateEditorComponent, {
+    this.dialog.open(TemplateEditorComponent, {
       width: "90vw",
       height: "90vh"
     })
+  }
+
+  openExamplePit() {
+    this.templateHelper.loadPitTemplateExample().then((data: TemplateJSON) => {
+      console.log(data);
+
+      this.dialog.open(TemplateEditorComponent, {
+        width: "90vw",
+        height: "90vh",
+        data: { template: data }
+      })
+    })  
   }
 
 }

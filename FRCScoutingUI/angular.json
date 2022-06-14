@@ -38,7 +38,12 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/xml-js/index.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "xml-js",
+              "safe-buffer"
             ]
           },
           "configurations": {
