@@ -30,11 +30,10 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ag-grid-community/dist/styles/ag-grid.css",
               "./node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
