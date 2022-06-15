@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[Templates] (
 	Type VARCHAR(10) NOT NULL,
 	Name VARCHAR(255) NOT NULL,
 	DefaultTemplate BIT NULL DEFAULT 0,
-	Xml XML NOT NULL,
+	Data VARCHAR(MAX) NOT NULL,
     CreatedBy int NULL,
     CreatedAt datetime2 NULL DEFAULT sysdatetime(),
     ModifiedBy int NULL,
