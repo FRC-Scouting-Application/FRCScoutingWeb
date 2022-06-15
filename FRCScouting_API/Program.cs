@@ -34,11 +34,10 @@ builder.Services.AddDbContext<AppDataContext>(options =>
 });
 builder.Services.AddScoped<IAppDataRepository, AppDataRepository>();
 
-// TBA API
+// Services
 builder.Services.AddHttpClient<ITBAService, TBAService>();
-
-// Update
 builder.Services.AddScoped<IUpdateService, UpdateService>();
+builder.Services.AddScoped<IReportsService, ReportsService>();
 
 // Misc
 builder.Services.AddDirectoryBrowser();

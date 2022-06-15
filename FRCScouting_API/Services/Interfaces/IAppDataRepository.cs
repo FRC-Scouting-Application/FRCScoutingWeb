@@ -1,4 +1,5 @@
 ﻿using Models.Dbo;
+using Models.Reports;
 
 namespace FRCScouting_API.Services.Interfaces
 {
@@ -8,6 +9,7 @@ namespace FRCScouting_API.Services.Interfaces
 
         Task<IList<Event>?> GetEventsAsync();
         Task<bool> AddEventsAsync(IList<Event> events);
+        DataReport.FRCDataCounts GenerateEventsDataReport();
 
         #endregion
         #region Teams
@@ -15,18 +17,21 @@ namespace FRCScouting_API.Services.Interfaces
         Task<IList<Team>?> GetTeamsAsync();
         Task<IList<Team>?> GetTeamsAsync(string eventKey);
         Task<bool> AddTeamsAsync(IList<Team> teams);
+        DataReport.FRCDataCounts GenerateTeamsDataReport();
 
         #endregion
         #region Matches
 
         Task<IList<Match>?> GetMatchesAsync(string eventKey);
         Task<bool> AddMatchesAsync(IList<Match> matches);
+        DataReport.FRCDataCounts GenerateMatchesDataReport();
 
         #endregion
         #region Templates
 
         Task<IList<Template>?> GetTemplatesAsync();
         Task<bool> AddTemplatesAsync(IList<Template> templates);
+        DataReport.CountPerType GenerateTemplatesDataReport();
 
         #endregion
         #region Scout

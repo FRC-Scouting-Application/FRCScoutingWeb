@@ -2,6 +2,7 @@
 using FRCScouting_API.Services.Interfaces;
 using Microsoft.ApplicationInsights;
 using Models.Dbo;
+using Models.Reports;
 
 namespace FRCScouting_API.Services
 {
@@ -54,6 +55,17 @@ namespace FRCScouting_API.Services
             }
         }
 
+        public DataReport.FRCDataCounts GenerateEventsDataReport()
+        {
+            DataReport.FRCDataCounts dataReport = new()
+            {
+                Total = _dbContext.Events.Count(),
+                Custom = _dbContext.Events.Where(t => t.Id != null && t.Id.StartsWith("custom-")).Count()
+            };
+
+            return dataReport;
+        }
+
         #endregion
         #region Teams
 
@@ -98,6 +110,18 @@ namespace FRCScouting_API.Services
             }
         }
 
+        public DataReport.FRCDataCounts GenerateTeamsDataReport()
+        {
+            DataReport.FRCDataCounts dataReport = new()
+            {
+                Total = _dbContext.Teams.Count(),
+                Test = _dbContext.Teams.Where(t => t.Nickname == "Off-Season Demo Team").Count(),
+                Custom = _dbContext.Teams.Where(t => t.Nickname != null && t.Nickname.StartsWith("custom-")).Count()
+            };
+
+            return dataReport;
+        }
+
         #endregion
         #region Matches
 
@@ -137,6 +161,17 @@ namespace FRCScouting_API.Services
             }
         }
 
+        public DataReport.FRCDataCounts GenerateMatchesDataReport()
+        {
+            DataReport.FRCDataCounts dataReport = new()
+            {
+                Total = _dbContext.Matches.Count(),
+                Custom = _dbContext.Matches.Where(t => t.Id != null && t.Id.StartsWith("custom-")).Count()
+            };
+
+            return dataReport;
+        }
+
         #endregion
         #region Templates
 
@@ -170,6 +205,22 @@ namespace FRCScouting_API.Services
                 _telemetryClient.TrackException(ex);
                 return false;
             }
+        }
+
+        public DataReport.CountPerType GenerateTemplatesDataReport()
+        {
+            Dictionary<string, int> byType = _dbContext.Templates.GroupBy(t => t.Type)
+                .Select(grp => new KeyValuePair<string, int>(grp.Key!, grp.Count()))
+                .ToDictionary(t => t.Key, t => t.Value);
+
+
+            DataReport.CountPerType dataReport = new()
+            {
+                Total = _dbContext.Templates.Count(),
+                ByType = byType
+            };
+
+            return dataReport;
         }
 
         #endregion
