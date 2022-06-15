@@ -15,6 +15,7 @@ namespace Models.Reports
         public CountPerType? Templates { get; set; }
 
         public ScoutDataCounts? Scouts { get; set; }
+        public ScoutDataCounts? Notes { get; set; }
 
         public class FRCDataCounts : TotalDataCounts
         {

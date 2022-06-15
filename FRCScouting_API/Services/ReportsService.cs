@@ -25,6 +25,8 @@ namespace FRCScouting_API.Services
                     Teams = _repository.GenerateTeamsDataReport(),
                     Matches = _repository.GenerateMatchesDataReport(),
                     Templates = _repository.GenerateTemplatesDataReport(),
+                    Scouts = _repository.GenerateScoutsDataReport(),
+                    Notes = _repository.GenerateNotesDataReport(),
                 };
 
                 return report;

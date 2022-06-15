@@ -2,7 +2,6 @@
 using Models.Dbo.Interfaces;
 using Models.Helpers;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Dbo
 {
@@ -19,7 +18,7 @@ namespace Models.Dbo
         public string? MatchKey { get; set; }
 
         [Required]
-        public byte[]? XML { get; set; }
+        public string? Data { get; set; }
 
         public bool NeedsUpdate(Scout obj)
         {

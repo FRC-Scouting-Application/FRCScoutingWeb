@@ -274,6 +274,35 @@ namespace FRCScouting_API.Services
             }
         }
 
+        public DataReport.ScoutDataCounts GenerateScoutsDataReport()
+        {
+            var byTypeQuery =
+                from s in _dbContext.Scouts
+                join t in _dbContext.Templates on
+                    new { id = s.TemplateId, v = s.TemplateVersion } equals new { id = t.Id, v = t.Version }
+                group t by t.Type into grp
+                select new KeyValuePair<string, int>(grp.Key!, grp.Count());
+            Dictionary<string, int> byType = byTypeQuery.ToDictionary(t => t.Key, t => t.Value);
+
+            Dictionary<string, int> byTeam = _dbContext.Scouts.GroupBy(s => s.TeamKey)
+                .Select(grp => new KeyValuePair<string, int>(grp.Key!, grp.Count()))
+                .ToDictionary(s => s.Key, s => s.Value);
+
+            Dictionary<string, int> byEvent = _dbContext.Scouts.GroupBy(s => s.EventKey)
+                .Select(grp => new KeyValuePair<string, int>(grp.Key!, grp.Count()))
+                .ToDictionary(s => s.Key, s => s.Value);
+
+            DataReport.ScoutDataCounts dataReport = new()
+            {
+                Total = _dbContext.Scouts.Count(),
+                ByType = byType,
+                ByTeam = byTeam,
+                ByEvent = byEvent
+            };
+
+            return dataReport;
+        }
+
         #endregion
         #region Notes
 
@@ -324,6 +353,27 @@ namespace FRCScouting_API.Services
                 return false;
             }
         }
+
+        public DataReport.ScoutDataCounts GenerateNotesDataReport()
+        {
+            Dictionary<string, int> byTeam = _dbContext.Notes.GroupBy(s => s.TeamKey)
+                .Select(grp => new KeyValuePair<string, int>(grp.Key!, grp.Count()))
+                .ToDictionary(s => s.Key, s => s.Value);
+
+            Dictionary<string, int> byEvent = _dbContext.Notes.GroupBy(s => s.EventKey)
+                .Select(grp => new KeyValuePair<string, int>(grp.Key!, grp.Count()))
+                .ToDictionary(s => s.Key, s => s.Value);
+
+            DataReport.ScoutDataCounts dataReport = new()
+            {
+                Total = _dbContext.Scouts.Count(),
+                ByTeam = byTeam,
+                ByEvent = byEvent
+            };
+
+            return dataReport;
+        }
+
         #endregion
     }
 }
