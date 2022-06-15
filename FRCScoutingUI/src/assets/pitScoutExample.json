@@ -1,0 +1,66 @@
+{
+  "templateName": "Test Template",
+  "templateType": "Pit",
+  "forYear": 2020,
+  "sections": [
+    {
+      "header": "Scout Info",
+      "fields": [
+        {
+          "type": "TextField",
+          "label": "Scout Name"
+        },
+        {
+          "type": "TextField",
+          "label": "Match Number"
+        }
+      ]
+    },
+    {
+      "header": "Drivetrain",
+      "fields": [
+        {
+          "type": "RadioList",
+          "label": "Drivetain Type",
+          "items": [
+            { "label": "4 Wheel Tank" },
+            { "label": "6 Wheel Tank" },
+            { "label": "Mecanum" },
+            { "label": "Swerve" },
+            {
+              "label": "Other",
+              "other": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "header": "Auto",
+      "fields": [
+        {
+          "type": "CheckList",
+          "label": "Ports during auto",
+          "items": [
+            { "label": "Lower" },
+            { "label": "High" },
+            { "label": "Inner" }
+          ]
+        },
+        {
+          "type": "Counter",
+          "max": 5,
+          "label": "How many fuel cells does your robot start with?"
+        },
+        {
+          "type": "Checkbox",
+          "label": "Can it cross the baseline?"
+        },
+        {
+          "type": "TextField",
+          "label": "Robot Weight"
+        }
+      ]
+    }
+  ]
+}

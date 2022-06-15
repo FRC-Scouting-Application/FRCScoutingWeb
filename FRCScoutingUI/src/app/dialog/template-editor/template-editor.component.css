@@ -1,0 +1,185 @@
+/* Grid Layout */
+.template-editor-body {
+  display: grid;
+  grid-template-columns: auto 400px;
+  gap: 1rem;
+}
+
+.template-editor-top {
+  border-bottom: 1px solid #dee2e6 !important;
+  display: inline-flex;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.dl-inline {
+  display: inline-flex;
+}
+
+.dl-inline > dl {
+  margin: 0;
+  margin-left: 1rem;
+}
+
+.template-editor-options {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: auto;
+}
+
+.template-editor-options > button {
+    margin-left: 0.5rem;
+}
+
+/* Preview */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.radio-button {
+  margin: 5px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.section .section-fields mat-form-field {
+  width: 100%;
+  margin-bottom: -20px;
+}
+
+.mat-radio-button, mat-checkbox {
+  width: 100%;
+}
+
+:host ::ng-deep .mat-radio-label, :host ::ng-deep .mat-checkbox-layout {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 4px;
+  padding-bottom: 2px;
+}
+
+:host ::ng-deep .mat-radio-label-content, :host ::ng-deep .mat-checkbox-label {
+  padding: 0;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Boxes in sections */
+.template-preview {
+  width: 400px;
+}
+
+.section {
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.section .section-header {
+  border-bottom: 1px solid gray;
+  width: 100%;
+  padding: 2px 8px;
+}
+
+.section .section-fields {
+  padding: 10px;
+}
+
+.section .section-field {
+  margin: 20px 0;
+}
+
+/* Counter */
+.counter-wrapper {
+  display: inline-flex;
+}
+
+.counter {
+  display: flex;
+  margin-left: 4px;
+}
+
+.counter > * {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.counter .remove {
+  color: white;
+  background-color: lightgray;
+}
+
+.counter .add {
+  color: white;
+  background-color: mediumpurple;
+}
+
+/* Drag and Drop Lists */
+
+.example-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid gray;
+  padding: 8px;
+}
+
+.example-list {
+  border: solid 1px #ccc;
+  min-height: 60px;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
+
+.example-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  /*display: flex;*/
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
