@@ -24,7 +24,7 @@ export class TeamsComponent implements OnInit {
   }
 
   getTeams() {
-    this.store.dispatch(ScoutStoreActions.getMatchesRequest());
+    this.store.dispatch(ScoutStoreActions.getTeamsRequest());
 
     this.store.pipe(select(ScoutStoreSelectors.selectTeams)).subscribe({
       next: (teams: Team[]) => {

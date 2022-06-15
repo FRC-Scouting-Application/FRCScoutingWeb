@@ -23,7 +23,7 @@ export class MatchesComponent implements OnInit {
   }
 
   getMatches() {
-    this.store.dispatch(ScoutStoreActions.getMatchesRequest());
+    this.store.dispatch(ScoutStoreActions.getMatchesRequest({ payload: "frc2386" }));
 
     this.store.pipe(select(ScoutStoreSelectors.selectMatches)).subscribe({
       next: (matches: Match[]) => {

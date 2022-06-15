@@ -1,11 +1,12 @@
 import { createReducer, on } from "@ngrx/store";
-import { getEventsRequest, getEventsSuccess, getMatchesRequest, getMatchesSuccess, getTeamsRequest, getTeamsSuccess, getTemplatesRequest, getTemplatesSuccess } from "./actions";
+import { getEventsRequest, getEventsSuccess, getMatchesRequest, getMatchesSuccess, getNotesByEventRequest, getNotesByTeamRequest, getNotesSuccess, getScoutsByEventRequest, getScoutsByTeamRequest, getScoutsSuccess, getTeamsRequest, getTeamsSuccess, getTemplatesRequest, getTemplatesSuccess } from "./actions";
 import { initialState } from "./state";
 
 const scoutReducer = createReducer(
 
   initialState,
 
+  /* Events */
   on(getEventsRequest, (state) => {
     return ({
       ...state,
@@ -13,7 +14,6 @@ const scoutReducer = createReducer(
       error: null
     });
   }),
-
   on(getEventsSuccess, (state, { payload }) => {
     return ({
       ...state,
@@ -23,6 +23,8 @@ const scoutReducer = createReducer(
     });
   }),
 
+
+  /* Teams */
   on(getTeamsRequest, (state) => {
     return ({
       ...state,
@@ -30,7 +32,6 @@ const scoutReducer = createReducer(
       error: null
     })
   }),
-
   on(getTeamsSuccess, (state, { payload }) => {
     return ({
       ...state,
@@ -40,6 +41,8 @@ const scoutReducer = createReducer(
     })
   }),
 
+
+  /* Matches */
   on(getMatchesRequest, (state) => {
     return ({
       ...state,
@@ -47,7 +50,6 @@ const scoutReducer = createReducer(
       error: null
     })
   }),
-
   on(getMatchesSuccess, (state, { payload }) => {
     return ({
       ...state,
@@ -57,6 +59,8 @@ const scoutReducer = createReducer(
     })
   }),
 
+
+  /* Templates */
   on(getTemplatesRequest, (state) => {
     return ({
       ...state,
@@ -64,11 +68,60 @@ const scoutReducer = createReducer(
       error: null
     })
   }),
-
   on(getTemplatesSuccess, (state, { payload }) => {
     return ({
       ...state,
       templates: payload,
+      loading: false,
+      error: null
+    })
+  }),
+
+
+  /* Notes */
+  on(getNotesByEventRequest, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      error: null
+    })
+  }),
+  on(getNotesByTeamRequest, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      error: null
+    })
+  }),
+  on(getNotesSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      notes: payload,
+      loading: false,
+      error: null
+    })
+  }),
+
+
+  /* Scouts */
+  on(getScoutsByEventRequest, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      error: null
+    })
+  }),
+  on(getScoutsByTeamRequest, (state) => {
+    return ({
+      ...state,
+      loading: true,
+      error: null
+    })
+  }),
+  on(getScoutsSuccess, (state, { payload }) => {
+    return ({
+      ...state,
+      scouts: payload,
       loading: false,
       error: null
     })

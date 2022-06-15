@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   getAllData() {
     this.store.dispatch(ScoutStoreActions.getEventsRequest());
     this.store.dispatch(ScoutStoreActions.getTeamsRequest());
-    this.store.dispatch(ScoutStoreActions.getMatchesRequest());
+    this.store.dispatch(ScoutStoreActions.getMatchesRequest({ payload: "frc2386" }));
     this.store.dispatch(ScoutStoreActions.getTemplatesRequest());
   }
 
