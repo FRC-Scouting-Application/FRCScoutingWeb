@@ -1,5 +1,6 @@
 using FRCScouting_API.Models;
 using FRCScouting_API.Services;
+using FRCScouting_API.Services.Interfaces;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 

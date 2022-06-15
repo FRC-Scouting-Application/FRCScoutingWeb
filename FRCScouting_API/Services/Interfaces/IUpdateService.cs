@@ -1,4 +1,4 @@
-﻿namespace FRCScouting_API.Services
+﻿namespace FRCScouting_API.Services.Interfaces
 {
     public interface IUpdateService
     {

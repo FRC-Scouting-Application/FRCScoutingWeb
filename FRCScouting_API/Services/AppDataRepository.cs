@@ -1,4 +1,5 @@
 ﻿using FRCScouting_API.Helpers;
+using FRCScouting_API.Services.Interfaces;
 using Microsoft.ApplicationInsights;
 using Models.Dbo;
 
