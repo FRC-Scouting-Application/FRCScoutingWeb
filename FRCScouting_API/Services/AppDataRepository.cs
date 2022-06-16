@@ -1,6 +1,8 @@
 ﻿using FRCScouting_API.Helpers;
+using FRCScouting_API.Services.Interfaces;
 using Microsoft.ApplicationInsights;
 using Models.Dbo;
+using Models.Reports;
 
 namespace FRCScouting_API.Services
 {
@@ -53,6 +55,17 @@ namespace FRCScouting_API.Services
             }
         }
 
+        public DataReport.FRCDataCounts GenerateEventsDataReport()
+        {
+            DataReport.FRCDataCounts dataReport = new()
+            {
+                Total = _dbContext.Events.Count(),
+                Custom = _dbContext.Events.Where(t => t.Id != null && t.Id.StartsWith("custom-")).Count()
+            };
+
+            return dataReport;
+        }
+
         #endregion
         #region Teams
 
@@ -97,6 +110,18 @@ namespace FRCScouting_API.Services
             }
         }
 
+        public DataReport.FRCDataCounts GenerateTeamsDataReport()
+        {
+            DataReport.FRCDataCounts dataReport = new()
+            {
+                Total = _dbContext.Teams.Count(),
+                Test = _dbContext.Teams.Where(t => t.Nickname == "Off-Season Demo Team").Count(),
+                Custom = _dbContext.Teams.Where(t => t.Nickname != null && t.Nickname.StartsWith("custom-")).Count()
+            };
+
+            return dataReport;
+        }
+
         #endregion
         #region Matches
 
@@ -136,6 +161,17 @@ namespace FRCScouting_API.Services
             }
         }
 
+        public DataReport.FRCDataCounts GenerateMatchesDataReport()
+        {
+            DataReport.FRCDataCounts dataReport = new()
+            {
+                Total = _dbContext.Matches.Count(),
+                Custom = _dbContext.Matches.Where(t => t.Id != null && t.Id.StartsWith("custom-")).Count()
+            };
+
+            return dataReport;
+        }
+
         #endregion
         #region Templates
 
@@ -169,6 +205,22 @@ namespace FRCScouting_API.Services
                 _telemetryClient.TrackException(ex);
                 return false;
             }
+        }
+
+        public DataReport.CountPerType GenerateTemplatesDataReport()
+        {
+            Dictionary<string, int> byType = _dbContext.Templates.GroupBy(t => t.Type)
+                .Select(grp => new KeyValuePair<string, int>(grp.Key!, grp.Count()))
+                .ToDictionary(t => t.Key, t => t.Value);
+
+
+            DataReport.CountPerType dataReport = new()
+            {
+                Total = _dbContext.Templates.Count(),
+                ByType = byType
+            };
+
+            return dataReport;
         }
 
         #endregion
@@ -222,6 +274,35 @@ namespace FRCScouting_API.Services
             }
         }
 
+        public DataReport.ScoutDataCounts GenerateScoutsDataReport()
+        {
+            var byTypeQuery =
+                from s in _dbContext.Scouts
+                join t in _dbContext.Templates on
+                    new { id = s.TemplateId, v = s.TemplateVersion } equals new { id = t.Id, v = t.Version }
+                group t by t.Type into grp
+                select new KeyValuePair<string, int>(grp.Key!, grp.Count());
+            Dictionary<string, int> byType = byTypeQuery.ToDictionary(t => t.Key, t => t.Value);
+
+            Dictionary<string, int> byTeam = _dbContext.Scouts.GroupBy(s => s.TeamKey)
+                .Select(grp => new KeyValuePair<string, int>(grp.Key!, grp.Count()))
+                .ToDictionary(s => s.Key, s => s.Value);
+
+            Dictionary<string, int> byEvent = _dbContext.Scouts.GroupBy(s => s.EventKey)
+                .Select(grp => new KeyValuePair<string, int>(grp.Key!, grp.Count()))
+                .ToDictionary(s => s.Key, s => s.Value);
+
+            DataReport.ScoutDataCounts dataReport = new()
+            {
+                Total = _dbContext.Scouts.Count(),
+                ByType = byType,
+                ByTeam = byTeam,
+                ByEvent = byEvent
+            };
+
+            return dataReport;
+        }
+
         #endregion
         #region Notes
 
@@ -272,6 +353,27 @@ namespace FRCScouting_API.Services
                 return false;
             }
         }
+
+        public DataReport.ScoutDataCounts GenerateNotesDataReport()
+        {
+            Dictionary<string, int> byTeam = _dbContext.Notes.GroupBy(s => s.TeamKey)
+                .Select(grp => new KeyValuePair<string, int>(grp.Key!, grp.Count()))
+                .ToDictionary(s => s.Key, s => s.Value);
+
+            Dictionary<string, int> byEvent = _dbContext.Notes.GroupBy(s => s.EventKey)
+                .Select(grp => new KeyValuePair<string, int>(grp.Key!, grp.Count()))
+                .ToDictionary(s => s.Key, s => s.Value);
+
+            DataReport.ScoutDataCounts dataReport = new()
+            {
+                Total = _dbContext.Scouts.Count(),
+                ByTeam = byTeam,
+                ByEvent = byEvent
+            };
+
+            return dataReport;
+        }
+
         #endregion
     }
 }

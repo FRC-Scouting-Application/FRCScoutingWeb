@@ -1,4 +1,4 @@
-﻿using FRCScouting_API.Services;
+﻿using FRCScouting_API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models.Dbo;
 
@@ -6,11 +6,11 @@ namespace FRCScouting_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TemplateController : ControllerBase
+    public class TemplatesController : ControllerBase
     {
         private readonly IAppDataRepository _repository;
 
-        public TemplateController(IAppDataRepository repository)
+        public TemplatesController(IAppDataRepository repository)
         {
             _repository = repository;
         }

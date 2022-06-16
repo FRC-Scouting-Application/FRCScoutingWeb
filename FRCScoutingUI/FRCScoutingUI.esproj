@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="src\app\features\api\services\" />
     <Folder Include="src\app\features\template\" />
+    <Folder Include="src\app\root-store\NewFolder\" />
     <Folder Include="src\app\services\" />
   </ItemGroup>
 </Project>

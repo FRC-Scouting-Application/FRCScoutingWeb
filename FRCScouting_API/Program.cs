@@ -1,5 +1,6 @@
 using FRCScouting_API.Models;
 using FRCScouting_API.Services;
+using FRCScouting_API.Services.Interfaces;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,11 +34,10 @@ builder.Services.AddDbContext<AppDataContext>(options =>
 });
 builder.Services.AddScoped<IAppDataRepository, AppDataRepository>();
 
-// TBA API
+// Services
 builder.Services.AddHttpClient<ITBAService, TBAService>();
-
-// Update
 builder.Services.AddScoped<IUpdateService, UpdateService>();
+builder.Services.AddScoped<IReportsService, ReportsService>();
 
 // Misc
 builder.Services.AddDirectoryBrowser();
