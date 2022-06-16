@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Event, Match, Note, Scout, Team, Template } from "../../features/api/models/dbo-models";
+import { Event, Match, Note, Scout, Team, Template } from "@app/features/api/models/dbo-models";
 
 /* Events */
 export const getEventsRequest = createAction(

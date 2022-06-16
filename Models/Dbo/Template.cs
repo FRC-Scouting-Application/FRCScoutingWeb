@@ -24,8 +24,7 @@ namespace Models.Dbo
         public bool DefaultTemplate { get; set; }
 
         [Required]
-        [Column("xml")]
-        public byte[]? XML { get; set; }
+        public string? Data { get; set; }
 
         public bool NeedsUpdate(Template obj)
         {

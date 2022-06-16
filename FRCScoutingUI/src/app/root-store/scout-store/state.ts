@@ -1,4 +1,4 @@
-import { Event, Team, Match, Template, Note, Scout } from "../../features/api/models/dbo-models";
+import { Event, Team, Match, Template, Note, Scout } from "@app/features/api/models/dbo-models";
 
 export interface State {
   events: Event[];

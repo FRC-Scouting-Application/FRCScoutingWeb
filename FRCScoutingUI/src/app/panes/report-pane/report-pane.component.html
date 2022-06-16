@@ -1,0 +1,72 @@
+
+<mat-card class="pane">
+  <mat-card-title>Data Report</mat-card-title>
+  <mat-card-content *ngIf="dataReport" class="pane-body">
+    <div class="data-report-item mat-elevation-z2">
+      <div class="title">Events</div>
+      <div class="dr-content">
+        <dl>
+          <dt>Custom</dt>
+          <dd>{{ dataReport.events?.custom }}</dd>
+        </dl>
+        <dl>
+          <dt>Total</dt>
+          <dd>{{ dataReport.events?.total }}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="data-report-item mat-elevation-z2">
+      <div class="title">Matches</div>
+      <div class="dr-content">
+        <dl>
+          <dt>Custom</dt>
+          <dd>{{ dataReport.matches?.custom }}</dd>
+        </dl>
+        <dl>
+          <dt>Total</dt>
+          <dd>{{ dataReport.matches?.total }}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="data-report-item mat-elevation-z2">
+      <div class="title">Teams</div>
+      <div class="dr-content">
+        <dl>
+          <dt>Custom</dt>
+          <dd>{{ dataReport.teams?.custom }}</dd>
+        </dl>
+        <dl>
+          <dt>Total</dt>
+          <dd>{{ dataReport.teams?.total }}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="data-report-item mat-elevation-z2">
+      <div class="title">Scouts</div>
+      <div class="dr-content">
+        <dl>
+          <dt>Total</dt>
+          <dd>{{ dataReport.scouts?.total }}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="data-report-item mat-elevation-z2">
+      <div class="title">Notes</div>
+      <div class="dr-content">
+        <dl>
+          <dt>Total</dt>
+          <dd>{{ dataReport.notes?.total }}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="data-report-item mat-elevation-z2">
+      <div class="title">Templates</div>
+      <div class="dr-content">
+        <dl>
+          <dt>Total</dt>
+          <dd>{{ dataReport.templates?.total }}</dd>
+        </dl>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

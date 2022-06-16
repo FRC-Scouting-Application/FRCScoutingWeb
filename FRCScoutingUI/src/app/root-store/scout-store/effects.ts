@@ -2,8 +2,8 @@ import { Injectable, OnDestroy } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
 import { catchError, map, of, switchMap } from "rxjs";
-import { Event, Match, Note, Scout, Team, Template } from "../../features/api/models/dbo-models";
-import { ScoutAPIService } from "../../features/api/services/scout.api.service";
+import { Event, Match, Note, Scout, Team, Template } from "@app/features/api/models/dbo-models";
+import { ScoutAPIService } from "@app/features/api/services/scout.api.service";
 
 import * as featureActions from './actions';
 

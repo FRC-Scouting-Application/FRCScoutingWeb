@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 const materialModules = [
   MatButtonModule,
@@ -17,7 +19,9 @@ const materialModules = [
   MatFormFieldModule,
   MatInputModule,
   MatRadioModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatCardModule,
+  MatTableModule
 ]
 
 @NgModule({

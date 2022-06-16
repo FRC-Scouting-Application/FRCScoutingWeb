@@ -6,7 +6,7 @@ CREATE TABLE [dbo].[Scouts] (
 	TemplateVersion INT NOT NULL,
 	MatchKey VARCHAR(50) NULL FOREIGN KEY REFERENCES [dbo].[Matches](Id),
 	ScoutName VARCHAR(255) NOT NULL,
-	Xml XML NOT NULL,
+	Data VARCHAR(MAX) NOT NULL,
     CreatedBy int NULL,
     CreatedAt datetime2 NULL DEFAULT sysdatetime(),
     ModifiedBy int NULL,

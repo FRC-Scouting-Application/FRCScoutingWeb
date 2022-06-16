@@ -8,7 +8,7 @@ CREATE TABLE [history].[Scouts] (
 	TemplateVersion INT NOT NULL,
 	MatchKey VARCHAR(50) NULL,
 	ScoutName VARCHAR(255) NOT NULL,
-	Xml XML NOT NULL,
+	Data VARCHAR(MAX) NOT NULL,
     CreatedBy int NULL,
     CreatedAt datetime2 NULL,
     ModifiedBy int NULL,
