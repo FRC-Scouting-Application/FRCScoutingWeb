@@ -22,6 +22,7 @@ import { TemplatesComponent } from './pages/scouting-data/templates/templates.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TemplateEditorComponent } from './dialog/template-editor/template-editor.component';
 import { TemplateHelper } from './features/template/template';
+import { ReportPaneComponent } from './panes/report-pane/report-pane.component';
 
 export function initializeApp(appConfigService: AppConfigService) {
   return (): Promise<any> => {
@@ -58,7 +59,10 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
     TemplatesComponent,
 
     /* Dialogs */
-    TemplateEditorComponent
+    TemplateEditorComponent,
+
+    /* Panes */
+    ReportPaneComponent
    ],
   imports: [
     BrowserModule,

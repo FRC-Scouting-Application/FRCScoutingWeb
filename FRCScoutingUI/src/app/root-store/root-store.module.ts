@@ -6,14 +6,17 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { ScoutStoreModule } from './scout-store';
+import { ReportStoreModule } from './report-store';
 
 import { reducers } from './reducers';
+
 
 @NgModule({
 
     imports: [
         CommonModule,
         ScoutStoreModule,
+        ReportStoreModule,
         StoreModule.forRoot(reducers, {
             runtimeChecks: {
                 strictStateImmutability: false,
