@@ -1,4 +1,6 @@
 import { ColDef, ColGroupDef } from "ag-grid-community";
+import { AppStateService } from "../services/app-state.service";
+import { Event } from "@app/features/api/models/dbo-models";
 
 export const idColDef: ColDef = {
   field: 'id'
@@ -28,11 +30,32 @@ export const locationColDefs: ColDef[] = [
 
 export const eventColDefs: ColGroupDef[] = [
   {
+    headerName: 'Options',
+    children: [
+      {
+        field: 'Select',
+        cellRenderer: 'buttonCellRenderer',
+        pinned: 'left',
+        cellRendererParams: {
+          button: {
+            clicked: function (field: any) {
+              let event = field.data as Event;
+              AppStateService.state.selectedEvent = event;
+            },
+            name: 'Select Event',
+            color: 'basic'
+          }
+        }
+      }
+    ]
+  },
+  {
     headerName: 'Event Info',
     children: [
-      { field: 'shortName' },
+      { field: 'shortName', pinned: 'left' },
       { field: 'name' },
       { field: 'eventType' },
+      { field: 'id', hide: true }
     ]
   },
   {

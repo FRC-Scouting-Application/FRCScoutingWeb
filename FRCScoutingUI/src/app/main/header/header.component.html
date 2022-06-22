@@ -8,6 +8,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!--
           <li class="nav-item dropdown" routerLinkActive="active">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               FRC Data
@@ -18,8 +19,23 @@
               <li><a class="dropdown-item" routerLink="/matches" routerLinkActive="active">Matches</a></li>
             </ul>
           </li>
+          -->
           <li class="nav-item">
-            <a class="nav-link"  routerLink="/templates" routerLinkActive="active">Templates</a>
+            <a class="nav-link" routerLink="/teams" routerLinkActive="active">Teams</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/events" routerLinkActive="active">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/templates" routerLinkActive="active">Templates</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="mat-elevation-z1 px-2">
+            <b>Selected Event:</b> {{ getSelectedEvent() }}
+            <button mat-icon-button matTooltip="close" (click)="resetSelectedEvent()">
+              <mat-icon class="material-icons">close</mat-icon>
+            </button>
           </li>
         </ul>
       </div>

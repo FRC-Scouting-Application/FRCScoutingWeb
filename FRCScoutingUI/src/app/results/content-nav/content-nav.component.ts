@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, ColGroupDef, StatusPanelDef } from 'ag-grid-community';
+import { ButtonCellRendererComponent } from './cell-renderers/button-cell-renderer/button-cell-renderer.component';
 
 @Component({
   selector: 'app-content-nav',
@@ -14,6 +15,10 @@ export class ContentNavComponent implements OnInit {
   @Input() public columnDefs!: (ColDef | ColGroupDef)[];
   @Input() public defaultColDef!: ColDef;
   @Input() public rowData!: any[];
+
+  public frameworkComponents = {
+    buttonCellRenderer: ButtonCellRendererComponent
+  }
 
   constructor() { }
 

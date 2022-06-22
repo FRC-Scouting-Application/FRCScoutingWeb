@@ -23,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TemplateEditorComponent } from './dialog/template-editor/template-editor.component';
 import { TemplateHelper } from './features/template/template';
 import { ReportPaneComponent } from './panes/report-pane/report-pane.component';
+import { AppStateService } from './services/app-state.service';
+import { ButtonCellRendererComponent } from './results/content-nav/cell-renderers/button-cell-renderer/button-cell-renderer.component';
 
 export function initializeApp(appConfigService: AppConfigService) {
   return (): Promise<any> => {
@@ -62,7 +64,10 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
     TemplateEditorComponent,
 
     /* Panes */
-    ReportPaneComponent
+    ReportPaneComponent,
+
+    /* Cell Renderers */
+    ButtonCellRendererComponent
    ],
   imports: [
     BrowserModule,
@@ -70,12 +75,15 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
     RootStoreModule,
     ApiModule,
     AppRoutingModule,
-    AgGridModule,
+    AgGridModule.withComponents([
+      ButtonCellRendererComponent
+    ]),
     MaterialModule,
     BrowserAnimationsModule,
   ],
   providers: [
     AppConfigService,
+    AppStateService,
     TemplateHelper,
     { provide: APP_INITIALIZER, useFactory: initializeApp, deps: [AppConfigService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ApiPrefixInterceptor, multi: true }
