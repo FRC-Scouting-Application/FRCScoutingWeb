@@ -1,0 +1,22 @@
+.action-list {
+    height: 75vh;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.action-item {
+    float: left;
+    clear: left;
+}
+
+.teams-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.teams-info {
+    width: 100%;
+    border: 1px solid lightgray;
+    margin: 71px 0 0 4px;
+}
+

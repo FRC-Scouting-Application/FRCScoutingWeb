@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, ColGroupDef, StatusPanelDef } from 'ag-grid-community';
+import { ColDef, ColGroupDef, GridApi, GridReadyEvent, StatusPanelDef } from 'ag-grid-community';
 import { ButtonCellRendererComponent } from './cell-renderers/button-cell-renderer/button-cell-renderer.component';
 
 @Component({
@@ -9,12 +9,14 @@ import { ButtonCellRendererComponent } from './cell-renderers/button-cell-render
   styleUrls: ['./content-nav.component.css']
 })
 export class ContentNavComponent implements OnInit {
-
+  private gridApi!: GridApi;
   @ViewChild(AgGridAngular) agGrid!: AgGridAngular;
 
   @Input() public columnDefs!: (ColDef | ColGroupDef)[];
   @Input() public defaultColDef!: ColDef;
   @Input() public rowData!: any[];
+
+  @Input() public search?: boolean;
 
   public frameworkComponents = {
     buttonCellRenderer: ButtonCellRendererComponent
@@ -32,6 +34,14 @@ export class ContentNavComponent implements OnInit {
         filter: true,
         resizable: true
       }
+  }
+
+  onGridReady(params: GridReadyEvent) {
+    this.gridApi = params.api;
+  }
+
+  onFilterTextBoxChanged(filter: string) {
+    this.gridApi.setQuickFilter(filter);
   }
 
 }

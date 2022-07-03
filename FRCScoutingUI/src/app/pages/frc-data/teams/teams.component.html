@@ -1,6 +1,40 @@
 <h1>Teams</h1>
 
-<app-content-nav
-  [columnDefs]="columnDefs"
-  [rowData]="teams"
-></app-content-nav>
+
+
+
+<div class="teams-main">
+  <div class="teams-list">
+    <app-content-nav
+      [columnDefs]="columnDefs"
+      [rowData]="teams"
+      [search]="true"
+      ></app-content-nav>
+  </div>
+  <div class="teams-info">
+    <h3
+        *ngIf="!getSelectedTeam()"
+        class="text-center"
+        >No Team Selected</h3>
+    <div *ngIf="getSelectedTeam(); let team as getSelectedTeam()">
+      <h3 class="text-center">{{ team.teamNumber }}: {{ team.nickname }}</h3>
+
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Team">
+
+        </mat-tab>
+        <mat-tab label="Pit Scout">
+
+        </mat-tab>
+        <mat-tab label="Match Scout">
+
+        </mat-tab>
+        <mat-tab label="Notes">
+
+        </mat-tab>
+      </mat-tab-group>
+
+    </div>
+  </div>
+</div>
+

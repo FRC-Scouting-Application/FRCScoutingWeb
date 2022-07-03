@@ -1,6 +1,6 @@
 import { ColDef, ColGroupDef } from "ag-grid-community";
 import { AppStateService } from "../services/app-state.service";
-import { Event } from "@app/features/api/models/dbo-models";
+import { Event, Team } from "@app/features/api/models/dbo-models";
 
 export const idColDef: ColDef = {
   field: 'id'
@@ -75,21 +75,27 @@ export const eventColDefs: ColGroupDef[] = [
   }
 ]
 
-export const teamsColDefs: ColGroupDef[] = [
+export const teamsColDefs: ColDef[] = [
+  { field: 'teamNumber', minWidth: 130, headerName: 'Team #', sort: 'asc' },
+  { field: 'nickname', minWidth: 200, headerName: 'Name' },
+  { field: 'name', minWidth: 200, headerName: 'aka' },
+  { field: 'rookieYear', minWidth: 140 },
   {
-    headerName: 'Team Info',
-    children: [
-      { field: 'teamNumber' },
-      { field: 'nickname', headerName: 'Team Name' },
-      { field: 'name', headerName: 'aka' },
-      { field: 'rookieYear' },
-    ]
-  },
-  {
-    headerName: 'Location',
-    children: [
-      ...locationColDefs
-    ]
+    field: 'Select',
+    cellRenderer: 'buttonCellRenderer',
+    pinned: 'left',
+    minWidth: 150,
+    initialWidth: 150,
+    cellRendererParams: {
+      button: {
+        clicked: function (field: any) {
+          let team = field.data as Team;
+          AppStateService.state.selectedTeam = team;
+        },
+        name: 'Select Team',
+        color: 'basic'
+      }
+    }
   }
 ]
 

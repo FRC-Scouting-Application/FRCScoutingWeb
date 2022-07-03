@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { ColGroupDef } from 'ag-grid-community';
+import { ColDef, ColGroupDef } from 'ag-grid-community';
 import { Team } from '@app/features/api/models/dbo-models';
 import { teamsColDefs } from '@app/results/col-defs';
 import { RootStoreState, ScoutStoreActions, ScoutStoreSelectors } from '@app/root-store';
+import { AppStateService } from '../../../services/app-state.service';
 
 @Component({
   selector: 'app-teams',
@@ -17,7 +18,7 @@ export class TeamsComponent implements OnInit {
   ) { }
 
   public teams: Team[] = [];
-  public columnDefs: ColGroupDef[] = teamsColDefs;
+  public columnDefs: ColDef[] = teamsColDefs;
 
   ngOnInit() {
     this.getTeams();
@@ -36,6 +37,10 @@ export class TeamsComponent implements OnInit {
         console.error("Failed to get Teams!")
       }
     })
+  }
+
+  getSelectedTeam(): Team | undefined {
+    return AppStateService.state.selectedTeam;
   }
 
 }

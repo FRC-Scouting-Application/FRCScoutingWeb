@@ -10,6 +10,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
 
 const materialModules = [
   MatButtonModule,
@@ -21,7 +23,9 @@ const materialModules = [
   MatRadioModule,
   MatCheckboxModule,
   MatCardModule,
-  MatTableModule
+  MatTableModule,
+  MatTabsModule,
+  MatListModule
 ]
 
 @NgModule({
