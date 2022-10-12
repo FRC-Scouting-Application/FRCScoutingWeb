@@ -258,11 +258,27 @@ namespace FRCScouting_API.Services
             }
         }
 
+        public async Task<IList<Scout>?> GetScoutsAsync()
+        {
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+                var scouts = _dbContext.Scouts.ToList();
+
+                return scouts;
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackException(ex);
+                return null;
+            }
+        }
+
         public async Task<bool> AddScoutsAsync(IList<Scout> scouts)
         {
             try
             {
-                EFHelper.AddUpdateRange<Scout, int>(_dbContext.Scouts, scouts);
+                EFHelper.AddUpdateRange<Scout, Guid>(_dbContext.Scouts, scouts);
 
                 await _dbContext.SaveChangesAsync();
                 return true;
@@ -338,11 +354,27 @@ namespace FRCScouting_API.Services
             }
         }
 
+        public async Task<IList<Note>?> GetNotesAsync()
+        {
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+                var notes = _dbContext.Notes.ToList();
+
+                return notes;
+            }
+            catch (Exception ex)
+            {
+                _telemetryClient.TrackException(ex);
+                return null;
+            }
+        }
+
         public async Task<bool> AddNotesAsync(IList<Note> notes)
         {
             try
             {
-                EFHelper.AddUpdateRange<Note, int>(_dbContext.Notes, notes);
+                EFHelper.AddUpdateRange<Note, Guid>(_dbContext.Notes, notes);
 
                 await _dbContext.SaveChangesAsync();
                 return true;

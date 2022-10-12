@@ -51,6 +51,24 @@ namespace FRCScouting_API.Controllers
             return Ok(notes);
         }
 
+        [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IList<Note>>> GetNotes()
+        {
+            var notes = await _repository.GetNotesAsync();
+
+            if (notes == null)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
+            if (notes.Count == 0)
+                return NotFound();
+
+            return Ok(notes);
+        }
+
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
