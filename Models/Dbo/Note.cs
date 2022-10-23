@@ -9,7 +9,7 @@ namespace Models.Dbo
     public class Note : ScoutBase, INeedsUpdate<Note>
     {
         [Required]
-        public string? Text { get; set; }
+        public string? Data { get; set; }
 
         public bool NeedsUpdate(Note obj)
         {

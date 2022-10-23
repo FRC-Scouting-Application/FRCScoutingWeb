@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Models.Dbo.Bases
 {
-    public class ScoutBase : DboBase, IKey<Guid>
+    public class ScoutBase : DboBase, IKey<string>
     {
         [Key]
-        public Guid Id { get; set; }
+        public string? Id { get; set; }
 
         [Required]
         [MaxLength(50)]

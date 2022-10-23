@@ -1,0 +1,29 @@
+{
+  "name": "Notes",
+  "type": "notes",
+  "sections": [
+    {
+      "header": "Scout Info",
+      "fields": [
+        {
+          "type": "text",
+          "label": "Scout Name"
+        },
+        {
+          "type": "text",
+          "label": "Title"
+        }
+      ]
+    },
+    {
+      "header": "Notes",
+      "fields": [
+        {
+          "type": "text",
+          "label": "Notes",
+          "multiline": true
+        }
+      ]
+    }
+  ]
+}

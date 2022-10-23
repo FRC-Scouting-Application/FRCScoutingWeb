@@ -1,7 +1,7 @@
 CREATE TABLE [history].[Templates] (
     HistoryId int IDENTITY(1,1) NOT NULL,
     HistoryStatusId int NOT NULL,
-	Id INT NOT NULL,
+	Id VARCHAR(50) NOT NULL,
 	Version INT NOT NULL DEFAULT 0,
 	Type VARCHAR(10) NOT NULL,
 	Name VARCHAR(255) NOT NULL,

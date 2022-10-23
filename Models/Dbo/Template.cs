@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Dbo
 {
-    public class Template : DboBase, INeedsUpdate<Template>, IKey<int>
+    public class Template : DboBase, INeedsUpdate<Template>, IKey<string>
     {
         [Key]
-        public int Id { get; set; }
+        public string? Id { get; set; }
 
         public int Version { get; set; }
 

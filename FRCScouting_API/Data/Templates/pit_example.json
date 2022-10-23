@@ -1,0 +1,77 @@
+{
+  "name": "Test Template",
+  "type": "pit",
+  "year": "2022",
+  "sections": [
+    {
+      "header": "Scout Info",
+      "fields": [
+        {
+          "type": "text",
+          "label": "Scout Name"
+        },
+        {
+          "type": "text",
+          "label": "Match Number"
+        }
+      ]
+    },
+    {
+      "header": "Drivetrain",
+      "fields": [
+        {
+          "type": "radio",
+          "label": "Drivetrain Type",
+          "other": true,
+          "items": [
+            {
+              "label": "4 Wheel Tank"
+            },
+            {
+              "label": "6 Wheel Tank"
+            },
+            {
+              "label": "Mecanum"
+            },
+            {
+              "label": "Swerve"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "header": "Auto",
+      "fields": [
+        {
+          "type": "checklist",
+          "label": "Ports during auto",
+          "items": [
+            {
+              "label": "Lower"
+            },
+            {
+              "label": "High"
+            },
+            {
+              "label": "Inner"
+            }
+          ]
+        },
+        {
+          "type": "counter",
+          "label": "Cells robot starts with?",
+          "max": 5
+        },
+        {
+          "type": "checkbox",
+          "label": "Can cross the baseline?"
+        },
+        {
+          "type": "text",
+          "label": "Robot Weight"
+        }
+      ]
+    }
+  ]
+}

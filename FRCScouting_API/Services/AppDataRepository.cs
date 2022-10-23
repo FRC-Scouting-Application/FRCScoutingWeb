@@ -195,7 +195,7 @@ namespace FRCScouting_API.Services
         {
             try
             {
-                EFHelper.AddUpdateRange<Template, int>(_dbContext.Templates, templates);
+                EFHelper.AddUpdateRange<Template, string>(_dbContext.Templates, templates);
 
                 await _dbContext.SaveChangesAsync();
                 return true;
@@ -278,7 +278,7 @@ namespace FRCScouting_API.Services
         {
             try
             {
-                EFHelper.AddUpdateRange<Scout, Guid>(_dbContext.Scouts, scouts);
+                EFHelper.AddUpdateRange<Scout, string>(_dbContext.Scouts, scouts);
 
                 await _dbContext.SaveChangesAsync();
                 return true;
@@ -374,7 +374,7 @@ namespace FRCScouting_API.Services
         {
             try
             {
-                EFHelper.AddUpdateRange<Note, Guid>(_dbContext.Notes, notes);
+                EFHelper.AddUpdateRange<Note, string>(_dbContext.Notes, notes);
 
                 await _dbContext.SaveChangesAsync();
                 return true;
