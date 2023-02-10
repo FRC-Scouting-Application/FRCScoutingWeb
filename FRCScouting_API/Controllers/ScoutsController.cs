@@ -51,6 +51,24 @@ namespace FRCScouting_API.Controllers
             return Ok(scouts);
         }
 
+        [HttpGet]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IList<Scout>>> GetScouts()
+        {
+            var scouts = await _repository.GetScoutsAsync();
+
+            if (scouts == null)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+
+            if (scouts.Count == 0)
+                return NotFound();
+
+            return Ok(scouts);
+        }
+
         [HttpPost]
         [Consumes("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]

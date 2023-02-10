@@ -38,6 +38,7 @@ namespace FRCScouting_API.Services.Interfaces
 
         Task<IList<Scout>?> GetScoutsByEventAsync(string eventKey);
         Task<IList<Scout>?> GetScoutsByTeamAsync(string teamKey);
+        Task<IList<Scout>?> GetScoutsAsync();
         Task<bool> AddScoutsAsync(IList<Scout> scouts);
         DataReport.ScoutDataCounts GenerateScoutsDataReport();
 
@@ -46,6 +47,7 @@ namespace FRCScouting_API.Services.Interfaces
 
         Task<IList<Note>?> GetNotesByEventAsync(string eventKey);
         Task<IList<Note>?> GetNotesByTeamAsync(string teamKey);
+        Task<IList<Note>?> GetNotesAsync();
         Task<bool> AddNotesAsync(IList<Note> notes);
         DataReport.ScoutDataCounts GenerateNotesDataReport();
 

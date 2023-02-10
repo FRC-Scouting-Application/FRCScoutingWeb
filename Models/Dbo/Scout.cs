@@ -8,7 +8,7 @@ namespace Models.Dbo
     public class Scout : ScoutBase, INeedsUpdate<Scout>
     {
         [Required]
-        public int TemplateId { get; set; }
+        public string? TemplateId { get; set; }
 
         [Required]
         public int TemplateVersion { get; set; }

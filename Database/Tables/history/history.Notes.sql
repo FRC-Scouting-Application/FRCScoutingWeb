@@ -1,7 +1,7 @@
 CREATE TABLE [history].[Notes] (
     HistoryId int IDENTITY(1,1) NOT NULL,
     HistoryStatusId int NOT NULL,
-	Id INT NOT NULL,
+	Id VARCHAR(50) NOT NULL,
 	TeamKey VARCHAR(50) NOT NULL,
 	EventKey VARCHAR(50) NOT NULL,
 	ScoutName VARCHAR(255) NOT NULL,

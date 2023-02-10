@@ -1,3 +1,4 @@
+using FRCScouting_API.Data;
 using FRCScouting_API.Models;
 using FRCScouting_API.Services;
 using FRCScouting_API.Services.Interfaces;
@@ -38,6 +39,7 @@ builder.Services.AddScoped<IAppDataRepository, AppDataRepository>();
 builder.Services.AddHttpClient<ITBAService, TBAService>();
 builder.Services.AddScoped<IUpdateService, UpdateService>();
 builder.Services.AddScoped<IReportsService, ReportsService>();
+builder.Services.AddScoped<SeedExampleData>();
 
 // Misc
 builder.Services.AddDirectoryBrowser();
