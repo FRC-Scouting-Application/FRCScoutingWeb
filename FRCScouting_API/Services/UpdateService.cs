@@ -37,7 +37,7 @@ namespace FRCScouting_API.Services
         public async Task<bool> UpdateEvents()
         {
             // Events
-            var events = await _tbaService.GetEventsAsync(2022);
+            var events = await _tbaService.GetEventsAsync(2023);
             if (events == null || events.Count == 0)
                 return false;
 

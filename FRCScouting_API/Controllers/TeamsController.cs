@@ -61,7 +61,7 @@ namespace FRCScouting_API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Media>> GetTeamMedia(string team_key)
         {
-            var media = await _tbaService.GetTeamMediaAsync(team_key, 2022);
+            var media = await _tbaService.GetTeamMediaAsync(team_key, 2023);
 
             if (media == null)
                 return NotFound();
